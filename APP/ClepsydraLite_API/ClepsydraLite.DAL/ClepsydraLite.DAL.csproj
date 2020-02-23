@@ -14,6 +14,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ClepsydraDALCommon\ClepsydraDALCommon.csproj" />
+    <ProjectReference Include="..\ClepsydraLite.DAL.Common\ClepsydraLite.DAL.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

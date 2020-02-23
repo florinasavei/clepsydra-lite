@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ClepsydraDALCommon
+namespace ClepsydraLite.DAL.Common
 {
     public enum PriceType
     {

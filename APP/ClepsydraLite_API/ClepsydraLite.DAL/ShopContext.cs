@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using ClepsydraDALCommon;
+using ClepsydraLite.DAL.Common;
 using Microsoft.EntityFrameworkCore;
 
-namespace ClepsydraLiteDAL
+namespace ClepsydraLite.DAL
 {
     public class ShopContext : DbContext
     {
@@ -11,7 +11,7 @@ namespace ClepsydraLiteDAL
         public DbSet<Price> Prices { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite("Data Source=products.db");
+            => options.UseSqlite("Data Source=../products.db");
     }
 
     public class Product

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace ClepsydraLiteAPI
+namespace ClepsydraLite.API
 {
     public class Program
     {
