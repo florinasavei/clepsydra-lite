@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using ClepsydraLite.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using ClepsydraLite.DAL.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClepsydraLite.API
 {
@@ -26,6 +30,14 @@ namespace ClepsydraLite.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            // Add db services.
+            services.AddDbContext<ShopDbContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IShopRepository, ShopRepository>();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

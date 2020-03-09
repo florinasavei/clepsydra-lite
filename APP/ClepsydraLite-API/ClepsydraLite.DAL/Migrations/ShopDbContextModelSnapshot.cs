@@ -2,24 +2,22 @@
 using ClepsydraLite.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ClepsydraLite.DAL.Migrations
 {
-    [DbContext(typeof(ShopContext))]
-    [Migration("20200223123201_update")]
-    partial class update
+    [DbContext(typeof(ShopDbContext))]
+    partial class ShopDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.1");
 
-            modelBuilder.Entity("ClepsydraLite.DAL.Price", b =>
+            modelBuilder.Entity("ClepsydraLite.DAL.Entities.Price", b =>
                 {
-                    b.Property<int>("PriceId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -32,30 +30,36 @@ namespace ClepsydraLite.DAL.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("PriceId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ProductId");
 
                     b.ToTable("Prices");
                 });
 
-            modelBuilder.Entity("ClepsydraLite.DAL.Product", b =>
+            modelBuilder.Entity("ClepsydraLite.DAL.Entities.Product", b =>
                 {
-                    b.Property<int>("ProductId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ProductName")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(200);
 
-                    b.HasKey("ProductId");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
 
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("ClepsydraLite.DAL.Price", b =>
+            modelBuilder.Entity("ClepsydraLite.DAL.Entities.Price", b =>
                 {
-                    b.HasOne("ClepsydraLite.DAL.Product", "Product")
+                    b.HasOne("ClepsydraLite.DAL.Entities.Product", "Product")
                         .WithMany("Prices")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)

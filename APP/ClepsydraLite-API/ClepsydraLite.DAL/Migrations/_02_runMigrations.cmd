@@ -1,1 +1,2 @@
-dotnet ef migrations add update --project ../
+dotnet ef database update --project ../
+pause
