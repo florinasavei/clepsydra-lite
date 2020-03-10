@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
+using ClepsydraLite.DAL.Models.Supplier;
 
 namespace ClepsydraLite.DAL.Mappings
 {
@@ -9,7 +10,8 @@ namespace ClepsydraLite.DAL.Mappings
     {
         public SupplierMappings()
         {
-            CreateMap<Entities.Supplier, Models.SupplierDto>().ReverseMap();
+            CreateMap<Entities.Supplier, SupplierDto>().ReverseMap();
+            CreateMap<Entities.Supplier, SupplierForCreationDto>().ReverseMap();
         }
     }
 }
