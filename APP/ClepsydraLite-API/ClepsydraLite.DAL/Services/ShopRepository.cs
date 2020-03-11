@@ -1,20 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using ClepsydraLite.DAL.Entities;
 
 namespace ClepsydraLite.DAL.Services
 {
-    public class ShopRepository: IShopRepository
+    public class ShopRepository : IShopRepository
     {
+        private readonly ShopDbContext _context;
+
+        public ShopRepository(ShopDbContext context)
+        {
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+        }
+
         public IEnumerable<Supplier> GetSuppliers()
         {
-            throw new NotImplementedException();
+            return _context.Suppliers.OrderBy(c => c.Name).ToList();
         }
 
         public Supplier GetSupplier(int supplierId)
         {
-            throw new NotImplementedException();
+            return _context.Suppliers
+                ?.Where(c => c.Id == supplierId)
+                .FirstOrDefault();
         }
 
         public bool SupplierExists(int supplierId)
@@ -39,7 +49,7 @@ namespace ClepsydraLite.DAL.Services
 
         public bool Save()
         {
-            throw new NotImplementedException();
+            return (_context.SaveChanges() >= 0);
         }
     }
 }

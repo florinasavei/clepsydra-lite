@@ -24,12 +24,27 @@ namespace ClepsydraLite.API.Controllers
             _mapper = mapper ?? throw new ArgumentException(nameof(mapper));
         }
 
-        //todo: finish route
+        [HttpGet]
+        public IActionResult GetSuppliers()
+        {
+            try
+            {
+                var pointsOfInterestForCity = _shopRepository.GetSuppliers();
+
+                return Ok(_mapper.Map<IEnumerable<SupplierDto>>(pointsOfInterestForCity));
+            }
+            catch (Exception ex)
+            {
+                //_logger.LogCritical($"Error while getting points of interest for City Id {cityId}", ex);
+                return StatusCode(500, "A problem happened while handling your request");
+            }
+        }
+
         [HttpPost]
-        public IActionResult CreatePointOfInterest(int cityId, [FromBody] SupplierForCreationDto pointOfInterest)
+        public IActionResult CreatePointOfInterest(int cityId, [FromBody] SupplierForCreationDto supplier)
         {
 
-            if (pointOfInterest.Description == pointOfInterest.Name)
+            if (supplier.Description == supplier.Name)
             {
                 ModelState.AddModelError(
                     "Description",
@@ -48,10 +63,7 @@ namespace ClepsydraLite.API.Controllers
                 return NotFound();
             }
 
-
-            var finalPointOfInterest = _mapper.Map<Supplier>(pointOfInterest);
-
-            //city.PointsOfInterest.Add(finalPointOfInterest);
+            var finalPointOfInterest = _mapper.Map<Supplier>(supplier);
 
             _shopRepository.AddSupplier(cityId, finalPointOfInterest);
 
