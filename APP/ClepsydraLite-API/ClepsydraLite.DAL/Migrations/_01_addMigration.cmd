@@ -1,2 +1,2 @@
-dotnet ef migrations add AddSuppliers --project ../ --verbose
+dotnet ef migrations add 001InitialMigration --project ../ --verbose
 pause

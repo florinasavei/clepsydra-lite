@@ -33,7 +33,7 @@ namespace ClepsydraLite.API
 
             // Add db services.
             services.AddDbContext<ShopDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IShopRepository, ShopRepository>();
 
