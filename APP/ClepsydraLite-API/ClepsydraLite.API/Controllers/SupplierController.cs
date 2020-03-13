@@ -40,8 +40,21 @@ namespace ClepsydraLite.API.Controllers
             }
         }
 
+        [HttpGet("{id}", Name = "GetSupplier")]
+        public IActionResult GetPointsOfInterest(int cityId, int id)
+        {
+            var pointOfInterestForCity = _shopRepository.GetSupplier(id);
+
+            if (pointOfInterestForCity == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<SupplierDto>(pointOfInterestForCity));
+        }
+
         [HttpPost]
-        public IActionResult CreatePointOfInterest(int cityId, [FromBody] SupplierForCreationDto supplier)
+        public IActionResult CreatePointOfInterest([FromBody] SupplierForCreationDto supplier)
         {
 
             if (supplier.Description == supplier.Name)
@@ -57,23 +70,16 @@ namespace ClepsydraLite.API.Controllers
                 return BadRequest(ModelState);
             }
 
+            var finalSupplier = _mapper.Map<Supplier>(supplier);
 
-            if (!_shopRepository.SupplierExists(cityId))
-            {
-                return NotFound();
-            }
-
-            var finalPointOfInterest = _mapper.Map<Supplier>(supplier);
-
-            _shopRepository.AddSupplier(cityId, finalPointOfInterest);
+            _shopRepository.AddSupplier(finalSupplier);
 
             _shopRepository.Save();
 
-            var createdPointOfInterestToReturn = _mapper.Map<SupplierDto>(finalPointOfInterest);
+            var createdPointOfInterestToReturn = _mapper.Map<SupplierDto>(finalSupplier);
 
-            return CreatedAtRoute("GetPointOfInterest", new
+            return CreatedAtRoute("GetSupplier", new
             {
-                cityId = cityId,
                 id = createdPointOfInterestToReturn.Id
             }, createdPointOfInterestToReturn);
 

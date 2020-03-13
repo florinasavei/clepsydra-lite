@@ -14,7 +14,7 @@ namespace ClepsydraLite.DAL.Services
 
         bool SupplierExists(int supplierId);
 
-        void AddSupplier(int supplierId, Supplier supplier);
+        void AddSupplier(Supplier supplier);
 
         void UpdateSupplier(int supplierId, Supplier supplier);
 

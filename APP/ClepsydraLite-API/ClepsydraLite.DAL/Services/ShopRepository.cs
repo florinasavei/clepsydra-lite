@@ -32,9 +32,9 @@ namespace ClepsydraLite.DAL.Services
             throw new NotImplementedException();
         }
 
-        public void AddSupplier(int supplierId, Supplier supplier)
+        public void AddSupplier(Supplier supplier)
         {
-            throw new NotImplementedException();
+            _context.Suppliers.Add(supplier);
         }
 
         public void UpdateSupplier(int supplierId, Supplier supplier)
