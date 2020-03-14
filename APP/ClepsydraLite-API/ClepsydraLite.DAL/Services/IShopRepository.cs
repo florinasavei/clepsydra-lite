@@ -16,7 +16,7 @@ namespace ClepsydraLite.DAL.Services
 
         void AddSupplier(Supplier supplier);
 
-        void UpdateSupplier(int supplierId, Supplier supplier);
+        void UpdateSupplier(Supplier supplier);
 
         void DeleteSupplier(Supplier supplier);
 

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NLog.Web;
 
 namespace ClepsydraLite.API
 {
@@ -16,34 +17,56 @@ namespace ClepsydraLite.API
     {
         public static void Main(string[] args)
         {
-            var host = CreateHostBuilder(args).Build();
+            var logger = NLogBuilder
+                .ConfigureNLog("nlog.config")
+                .GetCurrentClassLogger();
 
-            using (var scope = host.Services.CreateScope())
+            try
             {
-                try
-                {
-                    var context = scope.ServiceProvider.GetService<ShopDbContext>();
+                logger.Info("Initializing application...");
 
-                    // for demo purposes, delete the database & migrate on startup
-                    // so we can start with a clean state
-                    context.Database.EnsureDeleted();
-                    context.Database.Migrate();
+                var host = CreateHostBuilder(args).Build();
 
-                }
-                catch (Exception ex)
+                using (var scope = host.Services.CreateScope())
                 {
-                  //  logger.Error(ex, "Error on applying migrations");
+                    try
+                    {
+                        var context = scope.ServiceProvider.GetService<ShopDbContext>();
+
+                        // for demo purposes, delete the database & migrate on startup
+                        // so we can start with a clean state
+                        //context.Database.EnsureDeleted();
+                        context.Database.Migrate();
+
+                    }
+                    catch (Exception ex)
+                    {
+                          logger.Error(ex, "Error on applying migrations");
+                    }
                 }
+
+                host.Run();
+
             }
-               
-            host.Run();
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Application stopped because of exception");
+                throw ex;
+            }
+            finally
+            {
+                NLog.LogManager.Shutdown();
+            }
+
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder
+                        .UseStartup<Startup>()
+                        .UseNLog();
                 });
     }
 }

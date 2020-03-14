@@ -29,7 +29,7 @@ namespace ClepsydraLite.DAL.Services
 
         public bool SupplierExists(int supplierId)
         {
-            throw new NotImplementedException();
+            return _context.Suppliers.Any(c => c.Id == supplierId);
         }
 
         public void AddSupplier(Supplier supplier)
@@ -37,14 +37,14 @@ namespace ClepsydraLite.DAL.Services
             _context.Suppliers.Add(supplier);
         }
 
-        public void UpdateSupplier(int supplierId, Supplier supplier)
+        // just for consistency because other ORMs don't track changes, but EF does
+        public void UpdateSupplier(Supplier supplier)
         {
-            throw new NotImplementedException();
         }
 
         public void DeleteSupplier(Supplier supplier)
         {
-            throw new NotImplementedException();
+            _context.Suppliers.Remove(supplier);
         }
 
         public bool Save()
