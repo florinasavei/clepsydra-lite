@@ -5,7 +5,7 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 export class APPSettings {
-  private static _apiURL: string = 'https://localhost:8901/api';
+  private static _apiURL: string = 'https://localhost:8902/api';
 
   static get apiURL(): string {
     debugger;

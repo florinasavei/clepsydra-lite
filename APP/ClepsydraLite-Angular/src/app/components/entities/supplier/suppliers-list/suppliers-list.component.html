@@ -1,1 +1,14 @@
-<p>suppliers-list works!</p>
+<table class="clepsydra-simple-table">
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+    <tr *ngFor="let sup of service.suppliersList" class="supplier-row">
+      <td >{{sup.name}}</td>
+      <td >{{sup.description}}</td>
+      <td>
+        <i class="fas fa-pen fa-lg px-2 "></i>
+        <i class="far fa-trash-alt fa-lg text-danger px-2 "></i>
+      </td>
+    </tr>
+  </table>

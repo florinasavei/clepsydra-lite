@@ -37,6 +37,8 @@ namespace ClepsydraLite.API
             services.AddDbContext<ShopDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddCors();
+
             services.AddScoped<IShopRepository, ShopRepository>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -54,6 +56,18 @@ namespace ClepsydraLite.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(options =>
+                options
+                    .WithOrigins("http://localhost:8080",
+                        "http://localhost:8901",
+                        "http://localhost:8902",
+                        "http://localhost:8910",
+                        "http://localhost:8911",
+                        "http://localhost:8912")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+            );
 
             var swaggerOptions = new SwaggerOptions();
             Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
