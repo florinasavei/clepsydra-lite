@@ -8,20 +8,21 @@ using ClepsydraLite.DAL.Entities;
 using ClepsydraLite.DAL.Entities.Supplier;
 using ClepsydraLite.DAL.Services;
 using ClepsydraLite.DAL.Models.Supplier;
+using ClepsydraLite.DAL.Models.Supplier.Category;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace ClepsydraLite.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    public class SupplierController : ControllerBase
+    [Route("api/supplier/{supplierId}/[controller]")]
+    public class SupplierProductCategoryController : ControllerBase
     {
         private readonly IShopRepository _shopRepository;
         private readonly IMapper _mapper;
         private readonly ILogger<SupplierController> _logger;
 
-        public SupplierController(ILogger<SupplierController> logger, IShopRepository shopRepository, IMapper mapper)
+        public SupplierProductCategoryController(ILogger<SupplierController> logger, IShopRepository shopRepository, IMapper mapper)
         {
             _logger = logger ?? throw new ArgumentException(nameof(logger));
             _shopRepository = shopRepository ?? throw new ArgumentException(nameof(shopRepository));
@@ -29,13 +30,17 @@ namespace ClepsydraLite.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<SupplierDto>> GetSuppliers()
+        public IActionResult GetProductCategoriesForSuppliers(int supplierId)
         {
+            if (!_shopRepository.SupplierExists(supplierId))
+            {
+                return NotFound();
+            }
+
             try
             {
-                var pointsOfInterestForCity = _shopRepository.GetSuppliers();
-
-                return Ok(_mapper.Map<IEnumerable<SupplierDto>>(pointsOfInterestForCity));
+                var productCategoriesForSupplier = _shopRepository.GetProductCategoriesForSupplier(supplierId);
+                return Ok(_mapper.Map<IEnumerable<SupplierProductCategoryDto>>(productCategoriesForSupplier));
             }
             catch (Exception ex)
             {
@@ -44,51 +49,46 @@ namespace ClepsydraLite.API.Controllers
             }
         }
 
-        [HttpGet("{id}", Name = "GetSupplier")]
-        public ActionResult<SupplierDto> GetSupplier(int id)
+        [HttpGet("{supplierCategoryId}", Name = "GetProductCategoryForSupplier")]
+        public IActionResult GetProductCategoryForSupplier(int supplierId, int supplierCategoryId)
         {
-            var supplier = _shopRepository.GetSupplier(id);
+            var supplier = _shopRepository.GetProductCategoryForSupplier(supplierId, supplierCategoryId);
 
             if (supplier == null)
             {
-                _logger.LogInformation($"Supplier with id {id} was not found");
+                _logger.LogInformation($"Supplier with id {supplierId} was not found");
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<SupplierDto>(supplier));
+            return Ok(_mapper.Map<SupplierProductCategoryDto>(supplier));
         }
 
         [HttpPost]
-        public ActionResult<SupplierDto> CreateSupplier([FromBody] SupplierForCreationDto supplier)
+        public IActionResult CreateProductCategoryForSupplier(int supplierId, [FromBody] SupplierProductCategoryForCreationDto supplierProductCategory)
         {
-            if (supplier.Description == supplier.Name)
-            {
-                ModelState.AddModelError(
-                    "Description",
-                    "The provided description should be different from the name."
-                );
-            }
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var supplierToSave = _mapper.Map<SupplierCore>(supplier);
+            var productCategoryToSave = _mapper.Map<SupplierProductCategory>(supplierProductCategory);
 
-            _shopRepository.AddSupplier(supplierToSave);
+            _shopRepository.AddProductCategoryToSupplier(supplierId, productCategoryToSave);
 
             _shopRepository.Save();
 
-            SupplierDto savedSupplier = _mapper.Map<SupplierDto>(supplierToSave);
+            var savedSupplierCategory = _mapper.Map<SupplierProductCategoryDto>(productCategoryToSave);
 
-            return CreatedAtRoute("GetSupplier", new
+            return CreatedAtRoute("GetProductCategoryForSupplier", new
             {
-                id = savedSupplier.Id
-            }, savedSupplier);
+                supplierId = supplierId,
+                supplierCategoryId = savedSupplierCategory.Id
+            }, savedSupplierCategory);
 
         }
 
+        //TODO: finish implementation
         [HttpPut("{id}")]
         public IActionResult UpdateSupplier(int id,
             [FromBody] SupplierForCreationDto supplier)
@@ -119,9 +119,10 @@ namespace ClepsydraLite.API.Controllers
             _shopRepository.UpdateSupplier(supplierEntity);
             _shopRepository.Save();
 
-            return NoContent(); // according to REST standards, HTTP PUT should return NoContent
+            return NoContent();
         }
 
+        //TODO: finish implementation
         [HttpDelete("{id}")]
         public IActionResult DeleteSupplier(int id)
         {

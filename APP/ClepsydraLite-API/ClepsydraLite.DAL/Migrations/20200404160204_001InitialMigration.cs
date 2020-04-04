@@ -7,111 +7,114 @@ namespace ClepsydraLite.DAL.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Suppliers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(maxLength: 50, nullable: false),
-                    Description = table.Column<string>(maxLength: 200, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Suppliers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Categories",
+                name: "Suppliers_Core",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     Description = table.Column<string>(maxLength: 200, nullable: true),
-                    SupplierId = table.Column<int>(nullable: true)
+                    Email = table.Column<string>(nullable: true),
+                    Telephone = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Categories_Suppliers_SupplierId",
-                        column: x => x.SupplierId,
-                        principalTable: "Suppliers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_Suppliers_Core", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "Suppliers_ProductCategories",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     Description = table.Column<string>(maxLength: 200, nullable: true),
-                    CategoryId = table.Column<int>(nullable: true)
+                    SupplierCoreId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_Suppliers_ProductCategories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
+                        name: "FK_Suppliers_ProductCategories_Suppliers_Core_SupplierCoreId",
+                        column: x => x.SupplierCoreId,
+                        principalTable: "Suppliers_Core",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Prices",
+                name: "Suppliers_ProductOffers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    Description = table.Column<string>(maxLength: 200, nullable: true),
+                    BarCode = table.Column<string>(nullable: true),
+                    SupplierProductCategoryId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Suppliers_ProductOffers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Suppliers_ProductOffers_Suppliers_ProductCategories_SupplierProductCategoryId",
+                        column: x => x.SupplierProductCategoryId,
+                        principalTable: "Suppliers_ProductCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Suppliers_ProductOfferPrices",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PriceType = table.Column<int>(nullable: false),
                     PriceValue = table.Column<decimal>(nullable: false),
-                    ProductId = table.Column<int>(nullable: false)
+                    SupplierProductOfferId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Prices", x => x.Id);
+                    table.PrimaryKey("PK_Suppliers_ProductOfferPrices", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Prices_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
+                        name: "FK_Suppliers_ProductOfferPrices_Suppliers_ProductOffers_SupplierProductOfferId",
+                        column: x => x.SupplierProductOfferId,
+                        principalTable: "Suppliers_ProductOffers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Categories_SupplierId",
-                table: "Categories",
-                column: "SupplierId");
+                name: "IX_Suppliers_ProductCategories_SupplierCoreId",
+                table: "Suppliers_ProductCategories",
+                column: "SupplierCoreId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Prices_ProductId",
-                table: "Prices",
-                column: "ProductId");
+                name: "IX_Suppliers_ProductOfferPrices_SupplierProductOfferId",
+                table: "Suppliers_ProductOfferPrices",
+                column: "SupplierProductOfferId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_CategoryId",
-                table: "Products",
-                column: "CategoryId");
+                name: "IX_Suppliers_ProductOffers_SupplierProductCategoryId",
+                table: "Suppliers_ProductOffers",
+                column: "SupplierProductCategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Prices");
+                name: "Suppliers_ProductOfferPrices");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Suppliers_ProductOffers");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Suppliers_ProductCategories");
 
             migrationBuilder.DropTable(
-                name: "Suppliers");
+                name: "Suppliers_Core");
         }
     }
 }

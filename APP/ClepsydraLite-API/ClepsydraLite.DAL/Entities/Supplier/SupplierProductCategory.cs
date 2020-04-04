@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ClepsydraLite.DAL.Entities
+namespace ClepsydraLite.DAL.Entities.Supplier
 {
-    public class Category
+    public class SupplierProductCategory
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -17,6 +17,10 @@ namespace ClepsydraLite.DAL.Entities
         [MaxLength(200)]
         public string Description { get; set; }
 
-        public ICollection<Product> Products { get; } = new List<Product>();
+        public ICollection<SupplierProductOffer> SupplierProductOffer { get; } = new List<SupplierProductOffer>();
+
+        [ForeignKey("SupplierCoreId")]
+        public SupplierCore SupplierCore { get; set; }
+        public int SupplierCoreId { get; set; }
     }
 }

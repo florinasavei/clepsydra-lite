@@ -2,25 +2,35 @@
 using System.Collections.Generic;
 using System.Text;
 using ClepsydraLite.DAL.Entities;
+using ClepsydraLite.DAL.Entities.Supplier;
 
 namespace ClepsydraLite.DAL.Services
 {
     public interface IShopRepository
     {
+        #region Supplier Core
 
-        IEnumerable<Supplier> GetSuppliers();
+        IEnumerable<SupplierCore> GetSuppliers();
 
-        Supplier GetSupplier(int supplierId);
+        SupplierCore GetSupplier(int supplierId);
 
         bool SupplierExists(int supplierId);
 
-        void AddSupplier(Supplier supplier);
+        void AddSupplier(SupplierCore supplier);
 
-        void UpdateSupplier(Supplier supplier);
+        void UpdateSupplier(SupplierCore supplier);
 
-        void DeleteSupplier(Supplier supplier);
+        void DeleteSupplier(SupplierCore supplier); 
+
+
+        #endregion Supplier Core
+
+        IEnumerable<SupplierProductCategory> GetProductCategoriesForSupplier(int supplierId);
+
+        SupplierProductCategory GetProductCategoryForSupplier(int supplierId, int supplierCategoryId);
+
+        void AddProductCategoryToSupplier(int supplierId, SupplierProductCategory productCategoryToSave);
 
         bool Save();
-
     }
 }

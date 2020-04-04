@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using ClepsydraLite.DAL.Entities;
+using ClepsydraLite.DAL.Entities.Supplier;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
@@ -20,10 +21,10 @@ namespace ClepsydraLite.DAL
 
         }
 
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Price> Prices { get; set; }
-        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<SupplierCore> Suppliers_Core { get; set; }
+        public DbSet<SupplierProductCategory> Suppliers_ProductCategories { get; set; }
+        public DbSet<SupplierProductOffer> Suppliers_ProductOffers { get; set; }
+        public DbSet<SupplierProductOfferPrice> Suppliers_ProductOfferPrices { get; set; }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder options)
         //    => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
