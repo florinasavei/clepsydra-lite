@@ -98,6 +98,11 @@ namespace ClepsydraLite.DAL.Services
             _context.Suppliers_ProductCategories.Add(productCategoryToSave); 
         }
 
+        public void UpdateSupplierProductCategory(SupplierProductCategory courseForAuthorFromRepo)
+        {
+            // no code in this implementation
+        }
+
 
         public bool Save()
         {

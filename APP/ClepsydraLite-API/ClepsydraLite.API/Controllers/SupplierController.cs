@@ -58,6 +58,7 @@ namespace ClepsydraLite.API.Controllers
             return Ok(_mapper.Map<SupplierDto>(supplier));
         }
 
+        //TODO: also add category if specified
         [HttpPost]
         public ActionResult<SupplierDto> CreateSupplier([FromBody] SupplierForCreationDto supplier)
         {

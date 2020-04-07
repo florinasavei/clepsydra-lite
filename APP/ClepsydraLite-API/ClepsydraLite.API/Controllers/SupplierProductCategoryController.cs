@@ -88,35 +88,29 @@ namespace ClepsydraLite.API.Controllers
 
         }
 
-        //TODO: finish implementation
-        [HttpPut("{id}")]
-        public IActionResult UpdateSupplier(int id,
-            [FromBody] SupplierForCreationDto supplier)
+        [HttpPut("{supplierProductCategoryId}")]
+        public IActionResult UpdateProductCategoryForSupplier(int supplierId, int supplierProductCategoryId,
+            [FromBody] SupplierProductCategoryForUpdateDto productCategory)
         {
 
-            if (supplier.Description == supplier.Name)
+            if (!_shopRepository.SupplierExists(supplierId))
             {
-                ModelState.AddModelError(
-                    "Description",
-                    "The provided description should be different from the name."
-                );
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var supplierEntity = _shopRepository.GetSupplier(id);
-
-            if (supplierEntity == null)
-            {
-                _logger.LogInformation($"Supplier with id {id} was not found");
                 return NotFound();
             }
 
-            _mapper.Map(supplier, supplierEntity);
-            _shopRepository.UpdateSupplier(supplierEntity);
+            var supplierProductCategoryFromRepo = _shopRepository.GetProductCategoryForSupplier(supplierId, supplierProductCategoryId);
+
+            if (supplierProductCategoryFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            // map the entity to a CourseForUpdateDto
+            // apply the updated field values to that dto
+            // map the CourseForUpdateDto back to an entity
+
+            _mapper.Map(productCategory, supplierProductCategoryFromRepo);
+            _shopRepository.UpdateSupplierProductCategory(supplierProductCategoryFromRepo);
             _shopRepository.Save();
 
             return NoContent();

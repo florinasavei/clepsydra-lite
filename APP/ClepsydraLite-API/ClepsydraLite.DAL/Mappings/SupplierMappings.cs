@@ -17,6 +17,7 @@ namespace ClepsydraLite.DAL.Mappings
 
             CreateMap<SupplierProductCategory, SupplierProductCategoryDto>().ReverseMap();
             CreateMap<SupplierProductCategory, SupplierProductCategoryForCreationDto>().ReverseMap();
+            CreateMap<SupplierProductCategory, SupplierProductCategoryForUpdateDto>().ReverseMap();
 
         }
     }

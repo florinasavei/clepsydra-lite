@@ -31,6 +31,9 @@ namespace ClepsydraLite.DAL.Services
 
         void AddProductCategoryToSupplier(int supplierId, SupplierProductCategory productCategoryToSave);
 
+        void UpdateSupplierProductCategory(SupplierProductCategory courseForAuthorFromRepo);
+
+
         bool Save();
     }
 }
