@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { APPSettings } from 'src/main';
+import { APPSettings } from 'src/settings/api-settings';
 import { Supplier } from 'src/app/models/entities/supplier/supplier.model';
 
 @Injectable({

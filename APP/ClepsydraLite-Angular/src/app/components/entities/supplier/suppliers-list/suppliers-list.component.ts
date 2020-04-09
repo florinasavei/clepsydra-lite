@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SupplierService } from '../../../../services/entities/supplier/supplier.service';
+import { Supplier } from 'src/app/models/entities/supplier/supplier.model';
 
 
 @Component({
@@ -9,10 +10,15 @@ import { SupplierService } from '../../../../services/entities/supplier/supplier
 })
 export class SuppliersListComponent implements OnInit {
 
-  constructor(private service: SupplierService) { }
+  constructor(public service: SupplierService) { }
 
   ngOnInit(): void {
     this.service.refreshList();
   }
+
+  populateForm(sup:Supplier){
+    this.service.suppliersFormData =  Object.assign({}, sup);
+  }
+
 
 }
