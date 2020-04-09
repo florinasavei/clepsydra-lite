@@ -23,7 +23,7 @@ namespace ClepsydraLite.DAL.Entities.Supplier
         [Phone]
         public string Telephone { get; set; }
 
-        public ICollection<SupplierProductCategory> SupplierProductCategories { get; } = new List<SupplierProductCategory>();
+        public ICollection<SupplierProductCategory> SupplierProductCategories { get; set; } = new List<SupplierProductCategory>();
 
 
     }

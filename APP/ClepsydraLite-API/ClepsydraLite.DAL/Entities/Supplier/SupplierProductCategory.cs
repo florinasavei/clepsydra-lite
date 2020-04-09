@@ -17,7 +17,7 @@ namespace ClepsydraLite.DAL.Entities.Supplier
         [MaxLength(200)]
         public string Description { get; set; }
 
-        public ICollection<SupplierProductOffer> SupplierProductOffer { get; } = new List<SupplierProductOffer>();
+        public ICollection<SupplierProductOffer> SupplierProductOffer { get; set; } = new List<SupplierProductOffer>();
 
         [ForeignKey("SupplierCoreId")]
         public SupplierCore SupplierCore { get; set; }

@@ -20,7 +20,7 @@ namespace ClepsydraLite.DAL.Services
         public IEnumerable<SupplierCore> GetSuppliers()
         {
             return _context.Suppliers_Core
-                .Include(t=> t.SupplierProductCategories)
+                .Include(t => t.SupplierProductCategories)
                 .OrderBy(c => c.Name)
                 .ToList();
         }
@@ -40,6 +40,7 @@ namespace ClepsydraLite.DAL.Services
         public void AddSupplier(SupplierCore supplier)
         {
             _context.Suppliers_Core.Add(supplier);
+            _context.Suppliers_ProductCategories.AddRange(supplier.SupplierProductCategories);
         }
 
         // just for consistency because other ORMs don't track changes, but EF does
@@ -95,12 +96,17 @@ namespace ClepsydraLite.DAL.Services
 
             // always set the SupplierId to the passed-in supplierId
             productCategoryToSave.SupplierCoreId = supplierId;
-            _context.Suppliers_ProductCategories.Add(productCategoryToSave); 
+            _context.Suppliers_ProductCategories.Add(productCategoryToSave);
         }
 
-        public void UpdateSupplierProductCategory(SupplierProductCategory courseForAuthorFromRepo)
+        public void UpdateSupplierProductCategory(SupplierProductCategory supplierProductCategory)
         {
             // no code in this implementation
+        }
+
+        public void DeleteProductCategoryForSupplier(SupplierProductCategory supplierProductCategoryEntity)
+        {
+            _context.Suppliers_ProductCategories.Remove(supplierProductCategoryEntity);
         }
 
 

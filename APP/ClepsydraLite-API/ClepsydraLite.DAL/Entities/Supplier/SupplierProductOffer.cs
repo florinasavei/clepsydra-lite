@@ -19,7 +19,7 @@ namespace ClepsydraLite.DAL.Entities.Supplier
 
         public string BarCode { get; set; }
         
-        public ICollection<SupplierProductOfferPrice> SupplierProductPriceOffers { get; } = new List<SupplierProductOfferPrice>();
+        public ICollection<SupplierProductOfferPrice> SupplierProductPriceOffers { get; set; } = new List<SupplierProductOfferPrice>();
 
         [ForeignKey("SupplierProductCategoryId")]
         public SupplierProductCategory SupplierProductCategory { get; set; }

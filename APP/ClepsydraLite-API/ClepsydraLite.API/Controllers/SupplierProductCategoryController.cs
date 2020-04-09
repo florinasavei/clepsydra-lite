@@ -105,9 +105,9 @@ namespace ClepsydraLite.API.Controllers
                 return NotFound();
             }
 
-            // map the entity to a CourseForUpdateDto
+            // map the entity to a SupplierProductCategoryForUpdateDto
             // apply the updated field values to that dto
-            // map the CourseForUpdateDto back to an entity
+            // map the SupplierProductCategoryForUpdateDto back to an entity
 
             _mapper.Map(productCategory, supplierProductCategoryFromRepo);
             _shopRepository.UpdateSupplierProductCategory(supplierProductCategoryFromRepo);
@@ -117,18 +117,25 @@ namespace ClepsydraLite.API.Controllers
         }
 
         //TODO: finish implementation
-        [HttpDelete("{id}")]
-        public IActionResult DeleteSupplier(int id)
+        [HttpDelete("{supplierProductCategoryId}")]
+        public IActionResult DeleteProductCategoryForSupplier(int supplierId, int supplierProductCategoryId)
         {
 
-            var supplierEntity = _shopRepository.GetSupplier(id);
+            var supplierEntity = _shopRepository.GetSupplier(supplierId);
             if (supplierEntity == null)
             {
-                _logger.LogInformation($"Supplier with id {id} was not found");
+                _logger.LogInformation($"Supplier with id {supplierId} was not found");
                 return NotFound();
             }
 
-            _shopRepository.DeleteSupplier(supplierEntity);
+            var supplierProductCategoryEntity = _shopRepository.GetProductCategoryForSupplier(supplierId, supplierProductCategoryId);
+            if (supplierProductCategoryEntity == null)
+            {
+                _logger.LogInformation($"Supplier with id {supplierId} does not have a product category with the id {supplierProductCategoryId}");
+                return NotFound();
+            }
+
+            _shopRepository.DeleteProductCategoryForSupplier(supplierProductCategoryEntity);
             _shopRepository.Save();
 
             return NoContent();

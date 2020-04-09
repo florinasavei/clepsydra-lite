@@ -9,7 +9,7 @@ namespace ClepsydraLite.DAL.Models.Supplier
 
         public string Description { get; set; }
 
-        public ICollection<SupplierProductCategoryForCreationDto> ProductCategories { get; set; } = new LinkedList<SupplierProductCategoryForCreationDto>();
+        public ICollection<SupplierProductCategoryForCreationDto> SupplierProductCategories { get; set; } = new LinkedList<SupplierProductCategoryForCreationDto>();
 
     }
 }
