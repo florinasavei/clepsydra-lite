@@ -9,7 +9,8 @@ import { Supplier } from 'src/app/models/entities/supplier/supplier.model';
 })
 export class SuppliersListComponent implements OnInit {
 
-  constructor(public service: SupplierService) { }
+  constructor(public service: SupplierService) { 
+  }
 
   ngOnInit(): void {
     this.service.refreshList();

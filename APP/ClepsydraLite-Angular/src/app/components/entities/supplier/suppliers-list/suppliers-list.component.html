@@ -1,11 +1,14 @@
-<table class="clepsydra-simple-table">
+<table class="table-auto">
     <tr>
-      <th>Name</th>
-      <th>Description</th>
+      <th class="px-4 py-2">Name</th>
+      <th class="px-4 py-2">Description</th>
+      <th class="px-4 py-2">Categories</th>
+      <th class="px-4 py-2">Actions</th>
     </tr>
     <tr *ngFor="let sup of service.suppliersList" class="supplier-row">
       <td >{{sup.name}}</td>
       <td >{{sup.description}}</td>
+      <td>Categories</td>
       <td>
         <button mat-raised-button (click)="populateForm(sup)" color="primary">
           <fa-icon [icon]="['fas', 'edit']"></fa-icon>

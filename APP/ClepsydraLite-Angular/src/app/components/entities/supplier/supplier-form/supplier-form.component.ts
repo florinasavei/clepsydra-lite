@@ -28,7 +28,7 @@ export class SupplierFormComponent implements OnInit {
   }
 
   onSubmit(suppliersForm:NgForm){
-    if(suppliersForm.value.Id == 0){
+    if(!suppliersForm.value.Id){
       this.insertRecord(suppliersForm);
     } else{
       this.updateRecord(suppliersForm);
@@ -47,10 +47,10 @@ export class SupplierFormComponent implements OnInit {
     )
   }
 
-  updateRecord(form:NgForm){
+  updateRecord(suppliersForm:NgForm){
     this.service.putSupplier().subscribe(
       res => {
-        this.resetForm(form);
+        this.resetForm(suppliersForm);
         this.service.refreshList();
       },
       err =>{
