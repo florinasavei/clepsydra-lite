@@ -11,7 +11,7 @@
           <fa-icon [icon]="['fas', 'edit']"></fa-icon>
           Edit
         </button>
-        <button mat-raised-button color="primary">
+        <button mat-raised-button (click)="onDelete(sup.id)" color="primary">
           <fa-icon [icon]="['fas', 'trash']"></fa-icon>
           Delete
         </button>

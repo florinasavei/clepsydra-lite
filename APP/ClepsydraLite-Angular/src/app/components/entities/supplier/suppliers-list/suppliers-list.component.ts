@@ -19,4 +19,15 @@ export class SuppliersListComponent implements OnInit {
     this.service.suppliersFormData =  Object.assign({}, sup);
   }
 
+  onDelete(id){
+    if(confirm("Are you sure you want to delete?"))
+    this.service.deleteSupplier(id)
+    .subscribe(res => {
+      this.service.refreshList();
+    },
+      err=>{
+        console.info(err)
+      })
+  }
+
 }

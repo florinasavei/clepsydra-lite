@@ -14,13 +14,26 @@ export class SupplierService {
   
   constructor(private http: HttpClient) { }
 
+  postSupplier() {
+    return this.http.post(this.rootURL + '/', this.suppliersFormData);
+  }
+
+
+  putSupplier() {
+    return this.http.put(this.rootURL + '/' + this.suppliersFormData.id, this.suppliersFormData);
+  }
+
+  deleteSupplier(id) {
+    return this.http.delete(this.rootURL + '/' + id);
+  }
+
   refreshList() {
-    debugger;
     this.http.get(this.rootURL)
       .toPromise()
       .then(res =>
         this.suppliersList = res as Supplier[]
       );
   }
+
 
 }

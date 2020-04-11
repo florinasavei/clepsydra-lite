@@ -7,6 +7,9 @@
   
         <input matInput placeholder="Supplier Name" #Name="ngModel" [(ngModel)]="service.suppliersFormData.name"
           [ngModelOptions]="{standalone: true}" [value]="service.suppliersFormData.name" requried minlength="3">
+
+          <input matInput placeholder="Supplier Description" #Name="ngModel" [(ngModel)]="service.suppliersFormData.description"
+          [ngModelOptions]="{standalone: true}" [value]="service.suppliersFormData.description" requried minlength="3">
       
     </div>
   
