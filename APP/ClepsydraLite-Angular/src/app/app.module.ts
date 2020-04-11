@@ -12,6 +12,9 @@ import { CustomMaterialModule } from './material.module';
 import { SuppliersContainerComponent } from './components/entities/supplier/suppliers-container/suppliers-container.component';
 import { SuppliersListComponent } from './components/entities/supplier/suppliers-list/suppliers-list.component';
 import { SupplierFormComponent } from './components/entities/supplier/supplier-form/supplier-form.component';
+import { FontAwesomeModule,FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
 
 @NgModule({
   declarations: [
@@ -30,9 +33,14 @@ import { SupplierFormComponent } from './components/entities/supplier/supplier-f
     CustomMaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas, far);
+  }
+}
 

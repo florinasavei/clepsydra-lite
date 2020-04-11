@@ -7,8 +7,14 @@
       <td >{{sup.name}}</td>
       <td >{{sup.description}}</td>
       <td>
-        <i class="fas fa-pen fa-lg px-2" (click)="populateForm(sup)">Edit</i>
-        <i class="far fa-trash-alt fa-lg text-danger px-2 "></i>
+        <button mat-raised-button (click)="populateForm(sup)" color="primary">
+          <fa-icon [icon]="['fas', 'edit']"></fa-icon>
+          Edit
+        </button>
+        <button mat-raised-button color="primary">
+          <fa-icon [icon]="['fas', 'trash']"></fa-icon>
+          Delete
+        </button>
       </td>
     </tr>
   </table>
