@@ -24,6 +24,8 @@ export class SupplierFormComponent implements OnInit {
       id: 0,
       name : null,
       description: null,
+      email: null,
+      telephone: null
     }
   }
 

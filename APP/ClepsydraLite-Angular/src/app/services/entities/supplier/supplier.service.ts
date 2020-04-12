@@ -18,7 +18,6 @@ export class SupplierService {
     return this.http.post(this.rootURL + '/', this.suppliersFormData);
   }
 
-
   putSupplier() {
     return this.http.put(this.rootURL + '/' + this.suppliersFormData.id, this.suppliersFormData);
   }
@@ -34,6 +33,5 @@ export class SupplierService {
         this.suppliersList = res as Supplier[]
       );
   }
-
 
 }

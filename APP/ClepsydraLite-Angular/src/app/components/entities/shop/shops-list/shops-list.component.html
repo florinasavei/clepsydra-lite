@@ -1,1 +1,23 @@
-<p>shops-list works!</p>
+<table class="table-auto">
+    <tr>
+      <th class="px-4 py-2">Name</th>
+      <th class="px-4 py-2">Description</th>
+      <th class="px-4 py-2">Categories</th>
+      <th class="px-4 py-2">Actions</th>
+    </tr>
+    <tr *ngFor="let shop of service.shopsList" class="shopplier-row">
+      <td >{{shop.name}}</td>
+      <td >{{shop.description}}</td>
+      <td>Categories</td>
+      <td>
+        <button mat-raised-button (click)="populateForm(shop)" color="primary">
+          <fa-icon [icon]="['fas', 'edit']"></fa-icon>
+          Edit
+        </button>
+        <button mat-raised-button (click)="onDelete(shop.id)" color="primary">
+          <fa-icon [icon]="['fas', 'trash']"></fa-icon>
+          Delete
+        </button>
+      </td>
+    </tr>
+  </table>
