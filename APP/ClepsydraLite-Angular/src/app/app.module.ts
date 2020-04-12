@@ -15,7 +15,9 @@ import { SupplierFormComponent } from './components/entities/supplier/supplier-f
 import { FontAwesomeModule,FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
-import { ShopComponent } from './components/entities/shop/shop.component';
+import { ShopsContainerComponent } from './components/entities/shop/shops-container/shops-container.component';
+import { ShopsListComponent } from './components/entities/shop/shops-list/shops-list.component';
+import { ShopFormComponent } from './components/entities/shop/shop-form/shop-form.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { ShopComponent } from './components/entities/shop/shop.component';
     SuppliersContainerComponent,
     SuppliersListComponent,
     SupplierFormComponent,
-    ShopComponent
+    ShopsContainerComponent,
+    ShopsListComponent,
+    ShopFormComponent
   ],
   imports: [
     BrowserModule,
