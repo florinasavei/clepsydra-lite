@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ClepsydraLite.DAL.Entities;
+using ClepsydraLite.DAL.Entities.Shop;
 using ClepsydraLite.DAL.Entities.Supplier;
 using Microsoft.EntityFrameworkCore;
 
@@ -107,6 +108,40 @@ namespace ClepsydraLite.DAL.Services
         public void DeleteProductCategoryForSupplier(SupplierProductCategory supplierProductCategoryEntity)
         {
             _context.Suppliers_ProductCategories.Remove(supplierProductCategoryEntity);
+        }
+
+        public IEnumerable<ShopCore> GetShops()
+        {
+            return _context.Shops_Core
+                .OrderBy(c => c.Name)
+                .ToList();
+        }
+
+        public ShopCore GetShop(int shopId)
+        {
+            return _context.Shops_Core
+                ?.Where(c => c.Id == shopId)
+                .FirstOrDefault();
+        }
+
+        public bool ShopExists(int shopId)
+        {
+            return _context.Shops_Core.Any(c => c.Id == shopId);
+        }
+
+        public void AddShop(ShopCore shop)
+        {
+            _context.Shops_Core.Add(shop);
+        }
+
+        public void UpdateShop(ShopCore shop)
+        {
+            // just for consistency because other ORMs don't track changes, but EF does
+        }
+
+        public void DeleteShop(ShopCore shop)
+        {
+            _context.Shops_Core.Remove(shop);
         }
 
 

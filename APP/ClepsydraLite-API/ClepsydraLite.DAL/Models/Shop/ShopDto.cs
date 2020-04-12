@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using ClepsydraLite.DAL.Models.Supplier.Category;
 
-namespace ClepsydraLite.DAL.Models.Supplier
+namespace ClepsydraLite.DAL.Models.Shop
 {
-    public class SupplierDto
+    public class ShopDto
     {
         public int Id { get; set; }
 
@@ -15,6 +16,5 @@ namespace ClepsydraLite.DAL.Models.Supplier
 
         public string Telephone { get; set; }
 
-        public  IEnumerable<SupplierProductCategoryDto> SupplierProductCategories { get; set; } = new List<SupplierProductCategoryDto>();
     }
 }

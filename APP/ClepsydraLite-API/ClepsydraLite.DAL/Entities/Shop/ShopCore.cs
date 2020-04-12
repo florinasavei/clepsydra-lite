@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ClepsydraLite.DAL.Entities.Supplier
+namespace ClepsydraLite.DAL.Entities.Shop
 {
-    public class SupplierCore
+    public class ShopCore
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -22,8 +22,6 @@ namespace ClepsydraLite.DAL.Entities.Supplier
 
         [Phone]
         public string Telephone { get; set; }
-
-        public ICollection<SupplierProductCategory> SupplierProductCategories { get; set; } = new List<SupplierProductCategory>();
 
     }
 }

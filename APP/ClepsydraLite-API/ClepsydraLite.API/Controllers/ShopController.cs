@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using ClepsydraLite.DAL;
 using ClepsydraLite.DAL.Entities;
+using ClepsydraLite.DAL.Entities.Shop;
 using ClepsydraLite.DAL.Entities.Supplier;
+using ClepsydraLite.DAL.Models.Shop;
 using ClepsydraLite.DAL.Services;
 using ClepsydraLite.DAL.Models.Supplier;
 using Microsoft.AspNetCore.Mvc;
@@ -15,13 +17,13 @@ namespace ClepsydraLite.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class SupplierController : ControllerBase
+    public class ShopController : ControllerBase
     {
         private readonly IShopRepository _shopRepository;
         private readonly IMapper _mapper;
         private readonly ILogger<SupplierController> _logger;
 
-        public SupplierController(ILogger<SupplierController> logger, IShopRepository shopRepository, IMapper mapper)
+        public ShopController(ILogger<SupplierController> logger, IShopRepository shopRepository, IMapper mapper)
         {
             _logger = logger ?? throw new ArgumentException(nameof(logger));
             _shopRepository = shopRepository ?? throw new ArgumentException(nameof(shopRepository));
@@ -29,25 +31,25 @@ namespace ClepsydraLite.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<SupplierDto>> GetSuppliers()
+        public ActionResult<IEnumerable<ShopDto>> GetShops()
         {
             try
             {
-                var supplierEntities = _shopRepository.GetSuppliers();
+                var shopsEntities = _shopRepository.GetShops();
 
-                return Ok(_mapper.Map<IEnumerable<SupplierDto>>(supplierEntities));
+                return Ok(_mapper.Map<IEnumerable<ShopDto>>(shopsEntities));
             }
             catch (Exception ex)
             {
-                _logger.LogCritical($"Error while getting suppliers", ex);
+                _logger.LogCritical($"Error while getting shops", ex);
                 return StatusCode(500, "A problem happened while handling your request");
             }
         }
 
-        [HttpGet("{id}", Name = "GetSupplier")]
-        public ActionResult<SupplierDto> GetSupplier(int id)
+        [HttpGet("{id}", Name = "GetShop")]
+        public ActionResult<ShopDto> GetShop(int id)
         {
-            var supplier = _shopRepository.GetSupplier(id);
+            var supplier = _shopRepository.GetShop(id);
 
             if (supplier == null)
             {
@@ -55,13 +57,13 @@ namespace ClepsydraLite.API.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<SupplierDto>(supplier));
+            return Ok(_mapper.Map<ShopDto>(supplier));
         }
 
         [HttpPost]
-        public ActionResult<SupplierDto> CreateSupplier([FromBody] SupplierForCreationDto supplier)
+        public ActionResult<ShopDto> CreateShop([FromBody] ShopForCreationDto shop)
         {
-            if (supplier.Description == supplier.Name)
+            if (shop.Description == shop.Name)
             {
                 ModelState.AddModelError(
                     "Description",
@@ -74,27 +76,27 @@ namespace ClepsydraLite.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var supplierToSave = _mapper.Map<SupplierCore>(supplier);
+            var shopToSave = _mapper.Map<ShopCore>(shop);
 
-            _shopRepository.AddSupplier(supplierToSave);
+            _shopRepository.AddShop(shopToSave);
 
             _shopRepository.Save();
 
-            SupplierDto savedSupplier = _mapper.Map<SupplierDto>(supplierToSave);
+            ShopDto savedShop = _mapper.Map<ShopDto>(shopToSave);
 
-            return CreatedAtRoute("GetSupplier", new
+            return CreatedAtRoute("GetShop", new
             {
-                id = savedSupplier.Id
-            }, savedSupplier);
+                id = savedShop.Id
+            }, savedShop);
 
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateSupplier(int id,
-            [FromBody] SupplierForCreationDto supplier)
+        public IActionResult UpdateShop(int id,
+            [FromBody] ShopForCreationDto shop)
         {
 
-            if (supplier.Description == supplier.Name)
+            if (shop.Description == shop.Name)
             {
                 ModelState.AddModelError(
                     "Description",
@@ -107,33 +109,33 @@ namespace ClepsydraLite.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var supplierEntity = _shopRepository.GetSupplier(id);
+            var shopEntity = _shopRepository.GetShop(id);
 
-            if (supplierEntity == null)
+            if (shopEntity == null)
             {
-                _logger.LogInformation($"Supplier with id {id} was not found");
+                _logger.LogInformation($"Show with id {id} was not found");
                 return NotFound();
             }
 
-            _mapper.Map(supplier, supplierEntity);
-            _shopRepository.UpdateSupplier(supplierEntity);
+            _mapper.Map(shop, shopEntity);
+            _shopRepository.UpdateShop(shopEntity);
             _shopRepository.Save();
 
             return NoContent(); // according to REST standards, HTTP PUT should return NoContent
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteSupplier(int id)
+        public IActionResult DeleteShop(int id)
         {
 
-            var supplierEntity = _shopRepository.GetSupplier(id);
-            if (supplierEntity == null)
+            var shopEntity = _shopRepository.GetShop(id);
+            if (shopEntity == null)
             {
                 _logger.LogInformation($"Supplier with id {id} was not found");
                 return NotFound();
             }
 
-            _shopRepository.DeleteSupplier(supplierEntity);
+            _shopRepository.DeleteShop(shopEntity);
             _shopRepository.Save();
 
             return NoContent();
