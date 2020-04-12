@@ -1,23 +1,25 @@
-<table class="table-auto">
-    <tr>
-      <th class="px-4 py-2">Name</th>
-      <th class="px-4 py-2">Description</th>
-      <th class="px-4 py-2">Categories</th>
-      <th class="px-4 py-2">Actions</th>
-    </tr>
-    <tr *ngFor="let sup of service.suppliersList" class="supplier-row">
-      <td >{{sup.name}}</td>
-      <td >{{sup.description}}</td>
-      <td>Categories</td>
-      <td>
-        <button mat-raised-button (click)="populateForm(sup)" color="primary">
+<table class="table-auto w-full text-left">
+  <tr class="border border-b-2 border-gray-500">
+    <th class="px-4 py-2 border-r-2">Name</th>
+    <th class="px-4 py-2 border-r-2">Description</th>
+    <th class="px-4 py-2 border-r-2">Categories</th>
+    <th class="px-4 py-2">Actions</th>
+  </tr>
+  <tr *ngFor="let sup of service.suppliersList" class="border border-gray-500">
+    <td class="px-4 py-2 border-r-2">{{sup.name}}</td>
+    <td class="px-4 py-2 border-r-2">{{sup.description}}</td>
+    <td class="px-4 py-2 border-r-2">Categories</td>
+    <td class="px-4 py-2">
+      <div fxLayout="row" gdAuto="column" gdAlignRows="start start" gdGap="5px">
+        <button mat-raised-button (click)="populateForm(sup)" color="accent">
           <fa-icon [icon]="['fas', 'edit']"></fa-icon>
           Edit
         </button>
-        <button mat-raised-button (click)="onDelete(sup.id)" color="primary">
+        <button mat-raised-button (click)="onDelete(sup.id)" color="warn">
           <fa-icon [icon]="['fas', 'trash']"></fa-icon>
           Delete
         </button>
-      </td>
-    </tr>
-  </table>
+      </div>
+    </td>
+  </tr>
+</table>

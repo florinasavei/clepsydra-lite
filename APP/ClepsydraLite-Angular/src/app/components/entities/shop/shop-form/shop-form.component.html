@@ -1,22 +1,32 @@
-<p>shop-form works!</p>
 <form #shopForm="ngForm" autocomplete="off" (submit)="onSubmit(shopForm)">
 
-    <div class="flex flex-col">
-  
-      <input type="hidden" name="Id" #Name="ngModel" [(ngModel)]="service.shopFormData.id"
-        [value]=service.shopFormData.id>
-  
-        <input matInput placeholder="Shop Name" #Name="ngModel" [(ngModel)]="service.shopFormData.name"
-          [ngModelOptions]="{standalone: true}" [value]="service.shopFormData.name" requried minlength="3">
+  <div class="flex flex-col">
 
-          <input matInput placeholder="Shop Description" #Name="ngModel" [(ngModel)]="service.shopFormData.description"
-          [ngModelOptions]="{standalone: true}" [value]="service.shopFormData.description" requried minlength="3">
-      
-    </div>
-  
-    <div>
-      <button type="submit" [disabled]="shopForm.invalid "><i class="fas fa-save" requried></i> Save</button>
-      <button type="reset"><i class="fas fa-undo" requried></i> Reset</button>
-    </div>
-  </form>
-  
+    <input type="hidden" name="Id" #Name="ngModel" [(ngModel)]="service.shopFormData.id"
+      [value]=service.shopFormData.id>
+
+    <mat-form-field>
+      <mat-label>Shop Name</mat-label>
+      <input matInput placeholder="Shop Name" #Name="ngModel" [(ngModel)]="service.shopFormData.name"
+        [ngModelOptions]="{standalone: true}" [value]="service.shopFormData.name" requried minlength="3">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Shop Description</mat-label>
+      <input matInput placeholder="Shop Description" #Name="ngModel" [(ngModel)]="service.shopFormData.description"
+        [ngModelOptions]="{standalone: true}" [value]="service.shopFormData.description" requried minlength="3">
+    </mat-form-field>
+
+  </div>
+
+  <div fxLayout="row" gdAuto="column" gdAlignRows="start start" gdGap="5px">
+    <button mat-raised-button type="submit" [disabled]="shopForm.invalid " color="primary">
+      <fa-icon [icon]="['fas', 'save']"></fa-icon>
+      Save
+    </button>
+    <button mat-raised-button type="reset">
+      <fa-icon [icon]="['fas', 'undo']"></fa-icon>
+      Reset
+    </button>
+  </div>
+</form>

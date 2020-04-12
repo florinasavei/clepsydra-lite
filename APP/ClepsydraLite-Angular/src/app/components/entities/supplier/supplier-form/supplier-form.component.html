@@ -1,21 +1,33 @@
 <form #suppliersForm="ngForm" autocomplete="off" (submit)="onSubmit(suppliersForm)">
 
-    <div class="flex flex-col">
-  
-      <input type="hidden" name="Id" #Name="ngModel" [(ngModel)]="service.suppliersFormData.id"
-        [value]=service.suppliersFormData.id>
-  
-        <input matInput placeholder="Supplier Name" #Name="ngModel" [(ngModel)]="service.suppliersFormData.name"
-          [ngModelOptions]="{standalone: true}" [value]="service.suppliersFormData.name" requried minlength="3">
+  <div class="flex flex-col">
 
-          <input matInput placeholder="Supplier Description" #Name="ngModel" [(ngModel)]="service.suppliersFormData.description"
-          [ngModelOptions]="{standalone: true}" [value]="service.suppliersFormData.description" requried minlength="3">
-      
-    </div>
-  
-    <div>
-      <button type="submit" [disabled]="suppliersForm.invalid "><i class="fas fa-save" requried></i> Save</button>
-      <button type="reset"><i class="fas fa-undo" requried></i> Reset</button>
-    </div>
-  </form>
-  
+    <input type="hidden" name="Id" #Name="ngModel" [(ngModel)]="service.suppliersFormData.id"
+      [value]=service.suppliersFormData.id>
+
+    <mat-form-field>
+      <mat-label>Supplier Name</mat-label>
+      <input matInput placeholder="Supplier Name" #Name="ngModel" [(ngModel)]="service.suppliersFormData.name"
+        [ngModelOptions]="{standalone: true}" [value]="service.suppliersFormData.name" requried minlength="3">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Supplier Description</mat-label>
+      <input matInput placeholder="Supplier Description" #Name="ngModel"
+        [(ngModel)]="service.suppliersFormData.description" [ngModelOptions]="{standalone: true}"
+        [value]="service.suppliersFormData.description" requried minlength="3">
+    </mat-form-field>
+
+  </div>
+
+  <div fxLayout="row" gdAuto="column" gdAlignRows="start start" gdGap="5px">
+    <button mat-raised-button type="submit" [disabled]="suppliersForm.invalid " color="primary">
+      <fa-icon [icon]="['fas', 'save']"></fa-icon>
+      Save
+    </button>
+    <button mat-raised-button type="reset">
+      <fa-icon [icon]="['fas', 'undo']"></fa-icon>
+      Reset
+    </button>
+  </div>
+</form>
