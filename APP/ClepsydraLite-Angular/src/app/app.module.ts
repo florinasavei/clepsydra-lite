@@ -20,6 +20,8 @@ import { ShopsListComponent } from './components/entities/shop/shops-list/shops-
 import { ShopFormComponent } from './components/entities/shop/shop-form/shop-form.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import {BreadcrumbModule} from 'angular-crumbs';
+import { SupplierProductCategoriesContainerComponent } from './components/entities/supplier/product-categories/supplier-product-categories-container/supplier-product-categories-container.component';
+import { SupplierDetailsComponent } from './components/entities/supplier/supplier-details/supplier-details.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import {BreadcrumbModule} from 'angular-crumbs';
     ShopsContainerComponent,
     ShopsListComponent,
     ShopFormComponent,
-    NavbarComponent
+    NavbarComponent,
+    SupplierProductCategoriesContainerComponent,
+    SupplierDetailsComponent
   ],
   imports: [
     BrowserModule,
