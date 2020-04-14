@@ -19,6 +19,7 @@ import { ShopsContainerComponent } from './components/entities/shop/shops-contai
 import { ShopsListComponent } from './components/entities/shop/shops-list/shops-list.component';
 import { ShopFormComponent } from './components/entities/shop/shop-form/shop-form.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import {BreadcrumbModule} from 'angular-crumbs';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+    BreadcrumbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

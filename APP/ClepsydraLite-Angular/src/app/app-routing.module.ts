@@ -5,8 +5,14 @@ import { ShopsContainerComponent } from './components/entities/shop/shops-contai
 
 
 const routes: Routes = [
-  { path: 'suppliers', component: SuppliersContainerComponent },
-  { path: 'shops', component: ShopsContainerComponent },
+  {
+    path: 'suppliers', component: SuppliersContainerComponent, data: { breadcrumb: 'Suppliers' },
+    children: [
+      {
+        path: ':categories', component: SuppliersContainerComponent, data: { breadcrumb: 'Product Categories' },        
+      }]
+  },
+  { path: 'shops', component: ShopsContainerComponent, data: { breadcrumb: 'Shops' } },
 ];
 
 @NgModule({
