@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+
+        <button mat-button [matMenuTriggerFor]="animals">Entities</button>
+
+        <mat-menu #animals="matMenu">
+            <button mat-menu-item routerLink="/suppliers"
+                routerLinkActive="active">suppliers</button>
+            <button mat-menu-item [matMenuTriggerFor]="shops" routerLink="/shops"
+                routerLinkActive="active">shops</button>
+        </mat-menu>
+     
+        <mat-menu #shops="matMenu">
+            <button mat-menu-item>POS</button>
+        </mat-menu>
+    </mat-toolbar-row>
+</mat-toolbar>
+

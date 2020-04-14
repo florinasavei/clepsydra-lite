@@ -18,6 +18,7 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 import { ShopsContainerComponent } from './components/entities/shop/shops-container/shops-container.component';
 import { ShopsListComponent } from './components/entities/shop/shops-list/shops-list.component';
 import { ShopFormComponent } from './components/entities/shop/shop-form/shop-form.component';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ShopFormComponent } from './components/entities/shop/shop-form/shop-for
     SupplierFormComponent,
     ShopsContainerComponent,
     ShopsListComponent,
-    ShopFormComponent
+    ShopFormComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

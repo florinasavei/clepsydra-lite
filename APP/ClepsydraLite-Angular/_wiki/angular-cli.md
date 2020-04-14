@@ -1,7 +1,7 @@
 Creating a component:
 
 ```
-ng g c components/entities/shop --module app
+ng g c components/shared/shop --module app
 ```
 
 
