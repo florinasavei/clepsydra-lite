@@ -7,15 +7,23 @@ import { SupplierDetailsComponent } from './components/entities/supplier/supplie
 
 
 const routes: Routes = [
-  { path: 'supplier', component: SuppliersContainerComponent, data: { breadcrumb: 'Suppliers' } },
   {
-    path: 'supplier/:id', component: SupplierDetailsComponent, data: { breadcrumb: 'Supplier' },
-    children: [
-      { path: '', component: SupplierDetailsComponent, data: { breadcrumb: 'Details' }  },
-      { path: 'categories', component: SupplierProductCategoriesContainerComponent, data: { breadcrumb: 'Product Categories' } },
+    path: 'supplier', component: SuppliersContainerComponent, data: { breadcrumb: 'Suppliers' }, children: [
+      {
+        path: ':id',
+        children: [
+          {
+            path: 'details', component: SupplierDetailsComponent, data: { breadcrumb: 'Details' }, children: [
+              { path: 'categories', component: SupplierProductCategoriesContainerComponent, data: { breadcrumb: 'Product Categories' } }
+            ]
+          },
+          { path: '', redirectTo:"details",  pathMatch: 'full', data: { breadcrumb: 'Details' }, },
+        ]
+      },
+      { path: '', component: SuppliersContainerComponent, },
     ]
   },
-  { path: 'shops', component: ShopsContainerComponent, data: { breadcrumb: 'Shops' } },
+  { path: 'shops', component: ShopsContainerComponent, data: { breadcrumb: 'Shops' }, },
 ];
 
 @NgModule({
