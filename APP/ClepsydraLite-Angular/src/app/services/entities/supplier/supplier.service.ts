@@ -11,7 +11,8 @@ export class SupplierService {
   readonly rootURL = APPSettings.apiURL + '/supplier';
   suppliersFormData: Supplier;
   suppliersList: Supplier[];
-  
+  currentSupplier: Supplier;
+
   constructor(private http: HttpClient) { }
 
   postSupplier() {
@@ -34,4 +35,11 @@ export class SupplierService {
       );
   }
 
+  getById(id) {
+    this.http.get(this.rootURL + "/" + id)
+      .toPromise()
+      .then(res => {
+        this.currentSupplier = res as Supplier
+      });
+  }
 }

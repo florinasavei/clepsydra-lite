@@ -7,11 +7,11 @@ import { SupplierDetailsComponent } from './components/entities/supplier/supplie
 
 
 const routes: Routes = [
-  { path: 'suppliers', component: SuppliersContainerComponent, data: { breadcrumb: 'Suppliers' } },
+  { path: 'supplier', component: SuppliersContainerComponent, data: { breadcrumb: 'Suppliers' } },
   {
-    path: 'suppliers/:id', component: SupplierDetailsComponent, data: { breadcrumb: 'Supplier' },
+    path: 'supplier/:id', component: SupplierDetailsComponent, data: { breadcrumb: 'Supplier' },
     children: [
-      { path: '', component: SupplierDetailsComponent },
+      { path: '', component: SupplierDetailsComponent, data: { breadcrumb: 'Details' }  },
       { path: 'categories', component: SupplierProductCategoriesContainerComponent, data: { breadcrumb: 'Product Categories' } },
     ]
   },
