@@ -1,14 +1,18 @@
 <h2 class="text-center">Suppliers</h2>
 
-<div fxLayout="row" gdAuto="column dense" gdGap="30px">
-  <mat-card>
+<div class="py-4 flex justify-center">
+  <button [disabled]="service.formInEdit" mat-raised-button type="button" color="primary" (click)="toggleForm()">
+    <fa-icon [icon]="['fas', 'plus']"></fa-icon> Add New Supplier
+  </button>
+</div>
+
+
+<div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="center">
+  <mat-card fxFlex="0 1 calc(60% - 32px)">
     <app-suppliers-list></app-suppliers-list>
   </mat-card>
 
-  <mat-card>
-    <button *ngIf="!service.formInEdit" mat-raised-button type="button" (click)="toggleForm()">
-      <fa-icon [icon]="['fas', 'plus']"></fa-icon>
-    </button>
+  <mat-card fxFlex="0 1 calc(40% - 32px)">
     <app-supplier-form *ngIf="service.formInEdit"></app-supplier-form>
   </mat-card>
 </div>
