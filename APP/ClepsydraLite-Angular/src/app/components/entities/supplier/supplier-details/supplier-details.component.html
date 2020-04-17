@@ -1,3 +1,8 @@
 <p>supplier-details works!</p>
 
 <p>Current supplier: {{service.currentSupplier?.id}}</p>
+
+<a mat-raised-button [routerLink]="'product-categories'" >
+    <fa-icon [icon]="['fas', 'bars']"></fa-icon>
+    Product categories
+  </a>

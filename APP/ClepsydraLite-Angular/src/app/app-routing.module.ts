@@ -10,18 +10,25 @@ const routes: Routes = [
   {
     path: 'supplier', data: { breadcrumb: 'Suppliers' }, children: [
       {
+        path: '', pathMatch: "full", component: SuppliersContainerComponent
+      },
+      {
         path: ':id',
+        data: { breadcrumb: '' },
         children: [
+          { path: '', pathMatch: "full", redirectTo: "details", }, // supplier/5/details            
           {
-            path: 'details', component: SupplierDetailsComponent, data: { breadcrumb: 'Details' }, children: [
-              { path: 'categories', component: SupplierProductCategoriesContainerComponent, data: { breadcrumb: 'Product Categories' } },
+            path: 'details', data: { breadcrumb: 'Details' }, children: [
+              { path: '', pathMatch: "full",  component: SupplierDetailsComponent }, // supplier/5/details
+              {
+                path: 'product-categories',  data: { breadcrumb: 'Product Categories' }, children: [
+                  { path: '', pathMatch: "full", component: SupplierProductCategoriesContainerComponent },
+                ]
+              },
             ]
           },
-          { path: '', redirectTo:"details", pathMatch:"full"},
         ]
-      },
-      { path: '', component: SuppliersContainerComponent, },
-    ]
+      }]
   },
   { path: 'shops', component: ShopsContainerComponent, data: { breadcrumb: 'Shops' }, },
 ];
