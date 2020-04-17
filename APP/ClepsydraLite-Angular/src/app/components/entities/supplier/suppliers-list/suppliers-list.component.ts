@@ -17,7 +17,11 @@ export class SuppliersListComponent implements OnInit {
   }
 
   populateForm(sup:Supplier){
-    this.service.suppliersFormData =  Object.assign({}, sup);
+    this.service.formInEdit = true;
+    setTimeout(() => { //TODO: figure out a smarter way than using timeouts
+      this.service.suppliersFormData =  Object.assign({}, sup);
+    }, 0);
+
   }
 
   onDelete(id){

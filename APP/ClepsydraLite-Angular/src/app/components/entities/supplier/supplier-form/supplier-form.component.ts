@@ -13,49 +13,58 @@ export class SupplierFormComponent implements OnInit {
   constructor(public service: SupplierService) { }
 
   ngOnInit(): void {
+    this.service.formInEdit = true;
     this.resetForm();
   }
 
   resetForm(suppliersForm?: NgForm) {
-    if (suppliersForm != null) 
-    suppliersForm.form.reset();
+    if (suppliersForm != null)
+      suppliersForm.form.reset();
 
     this.service.suppliersFormData = {
       id: 0,
-      name : null,
+      name: null,
       description: null,
       email: null,
       telephone: null
     }
+
+    //this.service.formInEdit = false;
   }
 
-  onSubmit(suppliersForm:NgForm){
-    if(!suppliersForm.value.Id){
+  clearForm(form: any) {
+    form.reset();
+    this.service.formInEdit = false;
+  }
+
+  onSubmit(suppliersForm: NgForm) {
+    if (!suppliersForm.value.Id) {
       this.insertRecord(suppliersForm);
-    } else{
+    } else {
       this.updateRecord(suppliersForm);
-    } 
+    }
+    this.service.formInEdit = false;
   }
 
-  insertRecord(suppliersForm:NgForm){
+  insertRecord(suppliersForm: NgForm) {
     this.service.postSupplier().subscribe(
       res => {
         this.resetForm(suppliersForm);
         this.service.refreshList();
       },
-      err =>{
+      err => {
         console.info(err);
       }
     )
   }
 
-  updateRecord(suppliersForm:NgForm){
+  updateRecord(suppliersForm: NgForm) {
     this.service.putSupplier().subscribe(
       res => {
         this.resetForm(suppliersForm);
         this.service.refreshList();
       },
-      err =>{
+      err => {
         console.info(err);
       }
     )

@@ -25,7 +25,7 @@
       <fa-icon [icon]="['fas', 'save']"></fa-icon>
       Save
     </button>
-    <button mat-raised-button type="reset">
+    <button mat-raised-button type="button" (click)="clearForm(suppliersForm)">
       <fa-icon [icon]="['fas', 'undo']"></fa-icon>
       Reset
     </button>

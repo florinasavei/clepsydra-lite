@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { APPSettings } from 'src/settings/api-settings';
 import { Supplier } from 'src/app/models/entities/supplier/supplier.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class SupplierService {
   suppliersFormData: Supplier;
   suppliersList: Supplier[];
   currentSupplier: Supplier;
+  formInEdit: boolean = false;
 
   constructor(private http: HttpClient) { }
 

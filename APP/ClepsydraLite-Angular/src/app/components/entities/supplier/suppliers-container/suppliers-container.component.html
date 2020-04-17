@@ -6,6 +6,9 @@
   </mat-card>
 
   <mat-card>
-    <app-supplier-form></app-supplier-form>
+    <button *ngIf="!service.formInEdit" mat-raised-button type="button" (click)="toggleForm()">
+      <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+    </button>
+    <app-supplier-form *ngIf="service.formInEdit"></app-supplier-form>
   </mat-card>
 </div>
