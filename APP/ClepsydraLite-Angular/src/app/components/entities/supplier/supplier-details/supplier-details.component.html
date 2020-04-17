@@ -1,8 +1,40 @@
-<p>supplier-details works!</p>
+<br>
+<p>Current supplier: <strong title="id: {{service.currentSupplier?.id}}">{{service.currentSupplier?.name}}</strong></p>
 
-<p>Current supplier: {{service.currentSupplier?.id}}</p>
+<div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="center">
 
-<a mat-raised-button [routerLink]="'product-categories'" >
-    <fa-icon [icon]="['fas', 'bars']"></fa-icon>
-    Product categories
-  </a>
+    <mat-card [fxFlex]="('0 1 calc(60% - 32px)')">
+        <form #suppliersForm="ngForm" autocomplete="off">
+            <div class="flex flex-col">
+
+                <input type="hidden" name="Id" #Name="ngModel" [(ngModel)]="service.currentSupplier.id"
+                    [value]=service.currentSupplier.id>
+
+                <mat-form-field>
+                    <mat-label>Supplier Name</mat-label>
+                    <input readonly matInput placeholder="Supplier Name" #Name="ngModel"
+                        [(ngModel)]="service.currentSupplier.name" [ngModelOptions]="{standalone: true}"
+                        [value]="service.currentSupplier.name" requried minlength="3">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Supplier Description</mat-label>
+                    <input readonly matInput placeholder="Supplier Description" #Name="ngModel"
+                        [(ngModel)]="service.currentSupplier.description" [ngModelOptions]="{standalone: true}" sss
+                        [value]="service.currentSupplier.description" requried minlength="3">
+                </mat-form-field>
+
+            </div>
+        </form>
+    </mat-card>
+
+    <mat-card [fxFlex]="('0 1 calc(40% - 32px)')">
+        <div>
+            <a mat-raised-button [routerLink]="'product-categories'">
+                <fa-icon [icon]="['fas', 'bars']"></fa-icon>
+                Product categories
+            </a>
+        </div>
+    </mat-card>
+
+</div>

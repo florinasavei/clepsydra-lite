@@ -6,13 +6,13 @@
   </button>
 </div>
 
-
 <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="center">
-  <mat-card fxFlex="0 1 calc(60% - 32px)">
+  <mat-card [fxFlex]="('0 1 ' + service.formInEdit?'calc(60% - 32px)' : '100%' )">
     <app-suppliers-list></app-suppliers-list>
   </mat-card>
 
-  <mat-card fxFlex="0 1 calc(40% - 32px)">
+  <mat-card *ngIf="service.formInEdit" [fxFlex]="('0 1 ' + service.formInEdit ? 'calc(40% - 32px)' : '0%' )">
     <app-supplier-form *ngIf="service.formInEdit"></app-supplier-form>
   </mat-card>
+  
 </div>

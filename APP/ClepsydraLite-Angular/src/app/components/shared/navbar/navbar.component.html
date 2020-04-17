@@ -1,24 +1,25 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
 
-        <button mat-button [matMenuTriggerFor]="animals">Entities</button>
+        <button mat-button [matMenuTriggerFor]="entitis">Manage Entities</button>
 
-        <mat-menu #animals="matMenu">
-            <button mat-menu-item routerLink="/supplier"
-                routerLinkActive="active">suppliers</button>
-            <button mat-menu-item [matMenuTriggerFor]="shops" routerLink="/shops"
-                routerLinkActive="active">shops</button>
+        <mat-menu #entitis="matMenu">
+            <button mat-menu-item routerLink="/supplier" routerLinkActive="active">suppliers</button>
+            <button mat-menu-item routerLink="/shops" routerLinkActive="active">shops</button>
         </mat-menu>
-     
-        <mat-menu #shops="matMenu">
-            <button mat-menu-item>POS</button>
-        </mat-menu>
+
+
     </mat-toolbar-row>
 </mat-toolbar>
 
 <breadcrumb #parent>
+    <a mat-stroked-button  routerLink="/">
+        <fa-icon [icon]="['fas', 'home']"></fa-icon>
+    </a>
     <span class="breadcrumb" *ngFor="let route of parent.breadcrumbs">
-        <a mat-button *ngIf="!route.terminal" href="" [routerLink]="[route.url]">{{ route.displayName }}</a>
-        <a mat-button *ngIf="route.terminal">{{ route.displayName }}</a> <span class="clepsy-crumb-triangle" *ngIf="!route.terminal">></span>
+        <span class="clepsy-crumb-triangle mx-1">▶</span>
+        <a mat-stroked-button *ngIf="!route.terminal" href="" [routerLink]="[route.url]">{{ route.displayName }}</a>
+        <a mat-stroked-button *ngIf="route.terminal" class="bg-blue-300">{{ route.displayName }}</a>
+        <!-- <span class="clepsy-crumb-triangle mx-1" *ngIf="!route.terminal">▶</span> -->
     </span>
 </breadcrumb>
