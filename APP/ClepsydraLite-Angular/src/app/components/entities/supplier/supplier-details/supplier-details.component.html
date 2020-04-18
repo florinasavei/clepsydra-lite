@@ -4,7 +4,26 @@
 <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="center">
 
     <mat-card [fxFlex]="('0 1 calc(60% - 32px)')">
-        <form #suppliersForm="ngForm" autocomplete="off">
+
+
+        <form #suppliersForm="ngForm" autocomplete="off" (submit)="onSubmit(suppliersForm)">
+
+            <div>
+                <span class="mr-2">
+                    <button [disabled]="inEdit" mat-raised-button type="button" (click)="toggleEdit(true)">
+                        <fa-icon [icon]="['fas', 'pen']"></fa-icon>
+                        Edit
+                    </button>
+                </span>
+                <span>
+                    <button [disabled]="!inEdit" mat-raised-button type="button" (click)="clearForm(suppliersForm)">
+                        <fa-icon [icon]="['fas', 'undo']"></fa-icon>
+                        Cancle
+                    </button>
+                </span>
+            </div>
+            <br>
+    
             <div class="flex flex-col">
 
                 <input type="hidden" name="Id" #Name="ngModel" [(ngModel)]="service.currentSupplier.id"
@@ -12,19 +31,31 @@
 
                 <mat-form-field>
                     <mat-label>Supplier Name</mat-label>
-                    <input readonly matInput placeholder="Supplier Name" #Name="ngModel"
+                    <input [readonly]="!inEdit" matInput placeholder="Supplier Name" #Name="ngModel"
                         [(ngModel)]="service.currentSupplier.name" [ngModelOptions]="{standalone: true}"
                         [value]="service.currentSupplier.name" requried minlength="3">
                 </mat-form-field>
 
                 <mat-form-field>
                     <mat-label>Supplier Description</mat-label>
-                    <input readonly matInput placeholder="Supplier Description" #Name="ngModel"
+                    <input [readonly]="!inEdit" matInput placeholder="Supplier Description" #Name="ngModel"
                         [(ngModel)]="service.currentSupplier.description" [ngModelOptions]="{standalone: true}" sss
                         [value]="service.currentSupplier.description" requried minlength="3">
                 </mat-form-field>
 
             </div>
+
+            <div *ngIf="inEdit" fxLayout="row" gdAuto="column" gdAlignRows="start start" gdGap="5px">
+                <button mat-raised-button type="submit" [disabled]="suppliersForm.invalid " color="primary">
+                    <fa-icon [icon]="['fas', 'save']"></fa-icon>
+                    Save
+                </button>
+                <button mat-raised-button type="button" (click)="clearForm(suppliersForm)">
+                    <fa-icon [icon]="['fas', 'undo']"></fa-icon>
+                    Reset
+                </button>
+            </div>
+
         </form>
     </mat-card>
 

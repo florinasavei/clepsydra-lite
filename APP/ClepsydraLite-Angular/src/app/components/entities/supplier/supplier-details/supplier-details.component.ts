@@ -25,14 +25,63 @@ export class SupplierDetailsComponent implements OnInit {
       telephone: null
     }
 
+    this.populateSupplirForm()
+  
+  }
+
+  populateSupplirForm(){
     this.route.paramMap.subscribe(params => {
       this.supplierId = params.get("id")
     })
     
     this.service.getById(this.supplierId);
-  
   }
 
-  supplierId;  
+  supplierId;
+  
+  inEdit: boolean = false;
+
+  toggleEdit(value: boolean){
+    this.inEdit = value;
+  }
+
+  onSubmit(suppliersForm: NgForm) {
+    debugger;
+    if (!suppliersForm.value.Id) {
+      this.insertRecord(suppliersForm);
+    } else {
+      this.updateRecord(suppliersForm);
+    }
+    this.inEdit = false;
+    this.service.formInEdit = false;
+  }
+
+  insertRecord(suppliersForm: NgForm) {
+    this.service.postCurrentSupplier().subscribe(
+      res => {
+        this.service.refreshList();
+      },
+      err => {
+        console.info(err);
+      }
+    )
+  }
+
+  updateRecord(suppliersForm: NgForm) {
+    this.service.putCurrentSupplier().subscribe(
+      res => {
+        this.service.refreshList();
+      },
+      err => {
+        console.info(err);
+      }
+    )
+  }
+
+  clearForm(form: any) {
+    this.populateSupplirForm();
+    form.resetForm();
+    this.inEdit = false;
+  }
 
 }

@@ -21,8 +21,16 @@ export class SupplierService {
     return this.http.post(this.rootURL + '/', this.suppliersFormData);
   }
 
+  postCurrentSupplier() {
+    return this.http.post(this.rootURL + '/', this.currentSupplier);
+  }
+
   putSupplier() {
     return this.http.put(this.rootURL + '/' + this.suppliersFormData.id, this.suppliersFormData);
+  }
+  
+  putCurrentSupplier() {
+    return this.http.put(this.rootURL + '/' + this.currentSupplier.id, this.currentSupplier);
   }
 
   deleteSupplier(id) {
