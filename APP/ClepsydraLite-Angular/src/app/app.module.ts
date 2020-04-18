@@ -23,6 +23,7 @@ import {BreadcrumbModule} from 'angular-crumbs';
 import { SupplierProductCategoriesContainerComponent } from './components/entities/supplier/product-categories/supplier-product-categories-container/supplier-product-categories-container.component';
 import { SupplierDetailsComponent } from './components/entities/supplier/supplier-details/supplier-details.component';
 import { ProductCategoriesListComponent } from './components/entities/supplier/product-categories/product-categories-list/product-categories-list.component';
+import { HomeComponent } from './components/pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ProductCategoriesListComponent } from './components/entities/supplier/p
     NavbarComponent,
     SupplierProductCategoriesContainerComponent,
     SupplierDetailsComponent,
-    ProductCategoriesListComponent
+    ProductCategoriesListComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

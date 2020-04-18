@@ -1,13 +1,29 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
 
-        <button mat-button [matMenuTriggerFor]="entitis">Manage Entities</button>
+        <button mat-button [matMenuTriggerFor]="backOffice">Back Office</button>
+
+        <button mat-button [matMenuTriggerFor]="frontOffice">Front Office</button> 
+
+        <button mat-button [matMenuTriggerFor]="adminArea">Admin Area</button> 
+
+
+        <mat-menu #adminArea="matMenu">
+            <button mat-menu-item [matMenuTriggerFor]="entitis">Manage Entities</button>
+        </mat-menu>
 
         <mat-menu #entitis="matMenu">
             <button mat-menu-item routerLink="/supplier" routerLinkActive="active">suppliers</button>
-            <button mat-menu-item routerLink="/shops" routerLinkActive="active">shops</button>
+            <button mat-menu-item routerLink="/shop" routerLinkActive="active">shops</button>
         </mat-menu>
 
+        <mat-menu #backOffice="matMenu">
+            <button mat-menu-item routerLink="/" routerLinkActive="active">Orders</button>
+        </mat-menu>
+
+        <mat-menu #frontOffice="matMenu">
+            <button mat-menu-item routerLink="/" routerLinkActive="active">POS</button>
+        </mat-menu>
 
     </mat-toolbar-row>
 </mat-toolbar>

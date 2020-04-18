@@ -4,6 +4,7 @@ import { SuppliersContainerComponent } from './components/entities/supplier/supp
 import { ShopsContainerComponent } from './components/entities/shop/shops-container/shops-container.component';
 import { SupplierProductCategoriesContainerComponent } from './components/entities/supplier/product-categories/supplier-product-categories-container/supplier-product-categories-container.component';
 import { SupplierDetailsComponent } from './components/entities/supplier/supplier-details/supplier-details.component';
+import { HomeComponent } from './components/pages/home/home.component';
 
 
 const routes: Routes = [
@@ -19,9 +20,9 @@ const routes: Routes = [
           { path: '', pathMatch: "full", redirectTo: "details", }, // supplier/5/details            
           {
             path: 'details', data: { breadcrumb: 'Details' }, children: [
-              { path: '', pathMatch: "full",  component: SupplierDetailsComponent }, // supplier/5/details
+              { path: '', pathMatch: "full", component: SupplierDetailsComponent }, // supplier/5/details
               {
-                path: 'product-categories',  data: { breadcrumb: 'Product Categories' }, children: [
+                path: 'product-categories', data: { breadcrumb: 'Product Categories' }, children: [
                   { path: '', pathMatch: "full", component: SupplierProductCategoriesContainerComponent },
                 ]
               },
@@ -30,7 +31,8 @@ const routes: Routes = [
         ]
       }]
   },
-  { path: 'shops', component: ShopsContainerComponent, data: { breadcrumb: 'Shops' }, },
+  { path: 'shop', component: ShopsContainerComponent, data: { breadcrumb: 'Shops' }, },
+  { path: '', pathMatch: "full", component: HomeComponent, },
 ];
 
 @NgModule({
