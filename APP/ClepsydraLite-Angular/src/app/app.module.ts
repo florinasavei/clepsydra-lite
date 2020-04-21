@@ -22,8 +22,9 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import {BreadcrumbModule} from 'angular-crumbs';
 import { SupplierProductCategoriesContainerComponent } from './components/entities/supplier/product-categories/supplier-product-categories-container/supplier-product-categories-container.component';
 import { SupplierDetailsComponent } from './components/entities/supplier/supplier-details/supplier-details.component';
-import { ProductCategoriesListComponent } from './components/entities/supplier/product-categories/product-categories-list/product-categories-list.component';
 import { HomeComponent } from './components/pages/home/home.component';
+import { SupplierProductCategoriesListComponent } from './components/entities/supplier/product-categories/supplier-product-categories-list/supplier-product-categories-list.component';
+import { SupplierProductCategoryFormComponent } from './components/entities/supplier/product-categories/supplier-product-category-form/supplier-product-category-form.component';
 
 @NgModule({
   declarations: [
@@ -37,8 +38,9 @@ import { HomeComponent } from './components/pages/home/home.component';
     NavbarComponent,
     SupplierProductCategoriesContainerComponent,
     SupplierDetailsComponent,
-    ProductCategoriesListComponent,
-    HomeComponent
+    HomeComponent,
+    SupplierProductCategoriesListComponent,
+    SupplierProductCategoryFormComponent
   ],
   imports: [
     BrowserModule,

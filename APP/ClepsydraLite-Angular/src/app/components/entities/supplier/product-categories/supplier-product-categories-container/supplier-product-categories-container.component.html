@@ -1,1 +1,18 @@
-<p>supplier-product-categories-container works!</p>
+<h2 class="text-center">Product Categories</h2>
+
+<div class="py-4 flex justify-center">
+  <button [disabled]="service.formInEdit" mat-raised-button type="button" color="primary" (click)="toggleForm()">
+    <fa-icon [icon]="['fas', 'plus']"></fa-icon> Add New Product Category
+  </button>
+</div>
+
+<div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="center">
+  <mat-card [fxFlex]="('0 1 ' + service.formInEdit?'calc(60% - 32px)' : '100%' )">
+    <app-supplier-product-categories-list></app-supplier-product-categories-list>
+  </mat-card> 
+
+  <mat-card *ngIf="service.formInEdit" [fxFlex]="('0 1 ' + service.formInEdit ? 'calc(40% - 32px)' : '0%' )">
+    <app-supplier-product-category-form *ngIf="service.formInEdit"></app-supplier-product-category-form>
+  </mat-card>
+  
+</div>

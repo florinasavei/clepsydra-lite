@@ -1,0 +1,35 @@
+<form #supplierProducCategoriesForm="ngForm" autocomplete="off" (submit)="onSubmit(supplierProducCategoriesForm)">
+
+    <div class="flex flex-col">
+  
+      <input type="hidden" name="Id" #Name="ngModel" [(ngModel)]="service.supplierProducCategoriesFormData.id"
+        [value]=service.supplierProducCategoriesFormData.id>
+  
+      <mat-form-field>
+        <mat-label>Supplier Name</mat-label>
+        <input matInput placeholder="Category Name" #Name="ngModel" [(ngModel)]="service.supplierProducCategoriesFormData.name"
+          [ngModelOptions]="{standalone: true}" [value]="service.supplierProducCategoriesFormData.name" requried minlength="3">
+      </mat-form-field>
+  
+      <mat-form-field>
+        <mat-label>Supplier Description</mat-label>
+        <input matInput placeholder="Category Description" #Name="ngModel"
+          [(ngModel)]="service.supplierProducCategoriesFormData.description" [ngModelOptions]="{standalone: true}"
+          [value]="service.supplierProducCategoriesFormData.description" requried minlength="3">
+      </mat-form-field>
+  
+    </div>
+  
+    <div fxLayout="row" gdAuto="column" gdAlignRows="start start" gdGap="5px">
+      <button mat-raised-button type="submit" [disabled]="supplierProducCategoriesForm.invalid " color="primary">
+        <fa-icon [icon]="['fas', 'save']"></fa-icon>
+        Save
+      </button>
+      <button mat-raised-button type="button" (click)="clearForm(supplierProducCategoriesForm)">
+        <fa-icon [icon]="['fas', 'undo']"></fa-icon>
+        Reset
+      </button>
+    </div>
+    
+  </form>
+  

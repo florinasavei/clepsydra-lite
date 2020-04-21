@@ -1,7 +1,7 @@
 Creating a component:
 
 ```
-ng g c components/entities/supplier/product-categories/product-categories-list --module app
+ng g c components/entities/supplier/product-categories/supplier-product-categories-list --module app
 ```
 
 

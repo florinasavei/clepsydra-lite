@@ -46,7 +46,6 @@ export class SupplierDetailsComponent implements OnInit {
   }
 
   onSubmit(suppliersForm: NgForm) {
-    debugger;
     if (!suppliersForm.value.Id) {
       this.insertRecord(suppliersForm);
     } else {
