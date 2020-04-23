@@ -4,6 +4,7 @@ using System.Text;
 using ClepsydraLite.DAL.Entities;
 using ClepsydraLite.DAL.Entities.Shop;
 using ClepsydraLite.DAL.Entities.Supplier;
+using ClepsydraLite.DAL.Models.Supplier.Category.ProductOffer;
 
 namespace ClepsydraLite.DAL.Services
 {
@@ -34,6 +35,14 @@ namespace ClepsydraLite.DAL.Services
 
         void DeleteProductCategoryForSupplier(SupplierProductCategory supplierProductCategoryEntity);
         #endregion Supplier Product Category
+
+        IEnumerable<SupplierProductOffer> GetProductsFromCategoryForSupplier(int supplierId, int categoryId);
+        SupplierProductOffer GetProductFromCategoryForSupplier(int supplierId, int supplierProductCategoryId, int productId);
+        void AddProductToCategoryToSupplier(int supplierId, int supplierProductCategoryId, SupplierProductOffer productCategoryToSave);
+        void UpdateProductForSupplierProductCategory(SupplierProductOffer supplierProductCategoryFromRepo);
+        void DeleteProductFromCategoryForSupplier(SupplierProductOffer supplierProductCategoryEntity);
+
+
 
         #region Shop Core
         IEnumerable<ShopCore> GetShops();

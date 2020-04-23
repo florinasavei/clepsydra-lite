@@ -5,6 +5,7 @@ using System.Text;
 using ClepsydraLite.DAL.Entities;
 using ClepsydraLite.DAL.Entities.Shop;
 using ClepsydraLite.DAL.Entities.Supplier;
+using ClepsydraLite.DAL.Models.Supplier.Category.ProductOffer;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClepsydraLite.DAL.Services
@@ -109,6 +110,70 @@ namespace ClepsydraLite.DAL.Services
         {
             _context.Suppliers_ProductCategories.Remove(supplierProductCategoryEntity);
         }
+
+
+        public IEnumerable<SupplierProductOffer> GetProductsFromCategoryForSupplier(int supplierId, int categoryId)
+        {
+            if (supplierId == 0)
+            {
+                throw new ArgumentNullException(nameof(supplierId));
+            }
+
+            return _context.Suppliers_ProductOffers
+                .Where(c => c.SupplierProductCategoryId == categoryId && c.SupplierProductCategory.SupplierCoreId == supplierId)
+                .OrderBy(c => c.Name)
+                .ToList();
+        }
+
+        public SupplierProductOffer GetProductFromCategoryForSupplier(int supplierId, int supplierProductCategoryId, int productId)
+        {
+            if (supplierId == 0)
+            {
+                throw new ArgumentNullException(nameof(supplierId));
+            }
+
+            if (supplierProductCategoryId == 0)
+            {
+                throw new ArgumentNullException(nameof(supplierProductCategoryId));
+            }
+
+            if (productId == 0)
+            {
+                throw new ArgumentNullException(nameof(productId));
+            }
+
+            return _context.Suppliers_ProductOffers
+                .FirstOrDefault(c => c.Id == productId &&  c.SupplierProductCategoryId == supplierProductCategoryId && c.SupplierProductCategory.SupplierCoreId == supplierId);
+        }
+
+        public void AddProductToCategoryToSupplier(int supplierId, int supplierProductCategoryId,
+            SupplierProductOffer productOfferToSave)
+        {
+            if (supplierId == 0)
+            {
+                throw new ArgumentNullException(nameof(supplierId));
+            }
+
+            if (productOfferToSave == null)
+            {
+                throw new ArgumentNullException(nameof(productOfferToSave));
+            }
+
+            // always set the SupplierId to the passed-in supplierId
+            productOfferToSave.SupplierProductCategoryId = supplierProductCategoryId;
+            _context.Suppliers_ProductOffers.Add(productOfferToSave);
+        }
+
+        public void UpdateProductForSupplierProductCategory(SupplierProductOffer supplierProductCategoryFromRepo)
+        {
+          // nothing to do here
+        }
+
+        public void DeleteProductFromCategoryForSupplier(SupplierProductOffer supplierProductCategoryEntity)
+        {
+            _context.Suppliers_ProductOffers.Remove(supplierProductCategoryEntity);
+        }
+
 
         public IEnumerable<ShopCore> GetShops()
         {
