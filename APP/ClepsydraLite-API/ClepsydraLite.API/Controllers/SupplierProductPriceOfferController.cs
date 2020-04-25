@@ -16,14 +16,14 @@ using Microsoft.Extensions.Logging;
 namespace ClepsydraLite.API.Controllers
 {
     [ApiController]
-    [Route("api/supplier/{supplierId}/SupplierProductCategory/{supplierProductCategoryId}/[controller]")]
-    public class SupplierProductOfferController : ControllerBase
+    [Route("api/supplier/{supplierId}/SupplierProductCategory/{supplierProductCategoryId}/SupplierProductOffer/{supplierProductId}/[controller]")]
+    public class SupplierProductPriceOfferController : ControllerBase
     {
         private readonly IShopRepository _shopRepository;
         private readonly IMapper _mapper;
         private readonly ILogger<SupplierController> _logger;
 
-        public SupplierProductOfferController(ILogger<SupplierController> logger, IShopRepository shopRepository, IMapper mapper)
+        public SupplierProductPriceOfferController(ILogger<SupplierController> logger, IShopRepository shopRepository, IMapper mapper)
         {
             _logger = logger ?? throw new ArgumentException(nameof(logger));
             _shopRepository = shopRepository ?? throw new ArgumentException(nameof(shopRepository));

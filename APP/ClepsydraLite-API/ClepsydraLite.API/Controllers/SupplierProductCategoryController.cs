@@ -30,7 +30,7 @@ namespace ClepsydraLite.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetProductCategoriesForSuppliers(int supplierId)
+        public ActionResult<IEnumerable<SupplierProductCategoryDto>> GetProductCategoriesForSuppliers(int supplierId)
         {
             if (!_shopRepository.SupplierExists(supplierId))
             {
@@ -50,7 +50,7 @@ namespace ClepsydraLite.API.Controllers
         }
 
         [HttpGet("{supplierCategoryId}", Name = "GetProductCategoryForSupplier")]
-        public IActionResult GetProductCategoryForSupplier(int supplierId, int supplierCategoryId)
+        public ActionResult<SupplierProductCategoryDto> GetProductCategoryForSupplier(int supplierId, int supplierCategoryId)
         {
             var supplier = _shopRepository.GetProductCategoryForSupplier(supplierId, supplierCategoryId);
 
@@ -64,7 +64,7 @@ namespace ClepsydraLite.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateProductCategoryForSupplier(int supplierId, [FromBody] SupplierProductCategoryForCreationDto supplierProductCategory)
+        public ActionResult<SupplierProductCategoryDto> CreateProductCategoryForSupplier(int supplierId, [FromBody] SupplierProductCategoryForCreationDto supplierProductCategory)
         {
 
             if (!ModelState.IsValid)
@@ -116,7 +116,6 @@ namespace ClepsydraLite.API.Controllers
             return NoContent();
         }
 
-        //TODO: finish implementation
         [HttpDelete("{supplierProductCategoryId}")]
         public IActionResult DeleteProductCategoryForSupplier(int supplierId, int supplierProductCategoryId)
         {
