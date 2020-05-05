@@ -31,7 +31,7 @@ namespace ClepsydraLite.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<SupplierProductOfferDto>> GetProductsFromCategoryForSuppliers(int supplierId, int supplierProductCategoryId)
+        public ActionResult<IEnumerable<SupplierProductOfferDto>> GetProductPricesFromCategoryForSuppliers(int supplierId, int supplierProductCategoryId, int supplierProductId)
         {
             if (!_shopRepository.SupplierExists(supplierId))
             {
@@ -41,7 +41,7 @@ namespace ClepsydraLite.API.Controllers
 
             try
             {
-                var productCategoriesForSupplier = _shopRepository.GetProductsFromCategoryForSupplier(supplierId, supplierProductCategoryId);
+                var productCategoriesForSupplier = _shopRepository.GetProductPricesForSupplier(supplierId, supplierProductCategoryId, supplierProductId);
                 return Ok(_mapper.Map<IEnumerable<SupplierProductOfferDto>>(productCategoriesForSupplier));
             }
             catch (Exception ex)
@@ -51,10 +51,10 @@ namespace ClepsydraLite.API.Controllers
             }
         }
 
-        [HttpGet("{productId}", Name = "GetProductsFromCategoryForSupplier")]
-        public ActionResult<SupplierProductOfferDto> GetProductsFromCategoryForSupplier(int supplierId, int supplierProductCategoryId, int productId)
+        [HttpGet("{priceId}", Name = "GetProductPriceFromCategoryForSupplier")]
+        public ActionResult<SupplierProductOfferDto> GetProductPriceFromCategoryForSupplier(int supplierId, int supplierProductCategoryId, int supplierProductId, int priceId)
         {
-            var supplier = _shopRepository.GetProductFromCategoryForSupplier(supplierId, supplierProductCategoryId, productId);
+            var supplier = _shopRepository.GetProductPriceForSupplier(supplierId, supplierProductCategoryId, supplierProductId, priceId);
 
             if (supplier == null)
             {
@@ -66,7 +66,8 @@ namespace ClepsydraLite.API.Controllers
         }
 
         [HttpPost]
-        public ActionResult<SupplierProductOfferDto> CreateProductInCategoryForSupplier(int supplierId, int supplierProductCategoryId, [FromBody] SupplierProductOfferForCreationDto supplierProductCategory)
+        public ActionResult<SupplierProductOfferDto> CreateProductPriceInCategoryForSupplier(int supplierId, int supplierProductCategoryId, int supplierProductId,
+            [FromBody] SupplierProductOfferForCreationDto supplierProductCategory)
         {
 
             if (!ModelState.IsValid)
@@ -82,7 +83,7 @@ namespace ClepsydraLite.API.Controllers
 
             var savedSupplierCategory = _mapper.Map<SupplierProductOfferDto>(productCategoryToSave);
 
-            return CreatedAtRoute("GetProductsFromCategoryForSupplier", new
+            return CreatedAtRoute("GetProductPriceFromCategoryForSupplier", new
             {
                 supplierId = supplierId,
                 supplierProductCategoryId = supplierProductCategoryId,
@@ -91,8 +92,8 @@ namespace ClepsydraLite.API.Controllers
 
         }
 
-        [HttpPut("{productId}")]
-        public IActionResult UpdateProductCategoryForSupplier(int supplierId, int supplierProductCategoryId, int productId,
+        [HttpPut("{priceId}")]
+        public IActionResult UpdateProductPriceInCategoryForSupplier(int supplierId, int supplierProductCategoryId, int productId,
             [FromBody] SupplierProductOfferForCreationDto productCategory)
         {
 
@@ -119,8 +120,8 @@ namespace ClepsydraLite.API.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{productId}")]
-        public IActionResult DeleteProductCategoryForSupplier(int supplierId, int supplierProductCategoryId, int productId)
+        [HttpDelete("{priceId}")]
+        public IActionResult DeleteProductPriceInCategoryForSupplier(int supplierId, int supplierProductCategoryId, int productId)
         {
 
             var supplierEntity = _shopRepository.GetSupplier(supplierId);

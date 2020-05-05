@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ClepsydraLite.API.Controllers
 {
+    [ApiExplorerSettings(GroupName = "supplier")]
     [ApiController]
     [Route("api/[controller]")]
     public class SupplierController : ControllerBase

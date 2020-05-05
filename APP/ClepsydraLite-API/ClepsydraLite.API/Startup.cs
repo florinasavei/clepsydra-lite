@@ -46,7 +46,7 @@ namespace ClepsydraLite.API
 
             services.AddSwaggerGen(x =>
             {
-                x.SwaggerDoc("v1", new OpenApiInfo {Title = "Clepsydra Lite Api", Version = "v1"});
+                x.SwaggerDoc("v1", new OpenApiInfo {Title = "Clepsydra Lite Api v1", Version = "v1"});
             });
         }
 

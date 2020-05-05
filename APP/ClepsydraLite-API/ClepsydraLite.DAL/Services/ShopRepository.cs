@@ -175,6 +175,20 @@ namespace ClepsydraLite.DAL.Services
         }
 
 
+        public IEnumerable<SupplierProductOfferPrice> GetProductPriceForSupplier(in int supplierId, in int supplierProductCategoryId, in int supplierProductId,
+            in int priceId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public SupplierProductOfferPrice GetProductPricesForSupplier(in int supplierId, in int supplierProductCategoryId,
+            in int supplierProductId)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
         public IEnumerable<ShopCore> GetShops()
         {
             return _context.Shops_Core

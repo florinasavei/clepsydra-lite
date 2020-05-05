@@ -42,7 +42,9 @@ namespace ClepsydraLite.DAL.Services
         void UpdateProductForSupplierProductCategory(SupplierProductOffer supplierProductCategoryFromRepo);
         void DeleteProductFromCategoryForSupplier(SupplierProductOffer supplierProductCategoryEntity);
 
+        IEnumerable<SupplierProductOfferPrice> GetProductPriceForSupplier(in int supplierId, in int supplierProductCategoryId, in int supplierProductId, in int priceId);
 
+        SupplierProductOfferPrice GetProductPricesForSupplier(in int supplierId, in int supplierProductCategoryId, in int supplierProductId);
 
         #region Shop Core
         IEnumerable<ShopCore> GetShops();
@@ -60,5 +62,6 @@ namespace ClepsydraLite.DAL.Services
 
 
         bool Save();
+
     }
 }
