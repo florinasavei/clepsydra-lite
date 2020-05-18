@@ -1,0 +1,58 @@
+﻿.swagger-ui .topbar {
+    background-color: rgb(114, 26, 111);
+    border-bottom: 3px solid black;
+}
+
+.swagger-ui .responses-inner h4 {
+    font-size: 18px !important;
+}
+
+.responses-table.live-responses-table {
+    background-color: #e0d8f8;
+    margin-bottom: 20px;
+    border: 2px solid lightgrey;
+}
+
+.responses-table:not(.live-responses-table) {
+    background-color: #eef6cf;
+    color: darkgray;
+    opacity: .92;
+}
+
+.opblock-section-header > h4 {
+    color: darkgray !important;
+}
+
+.opblock-section-header > h4:before {
+    content: "ℹ️  ";
+}
+
+.responses-inner > div > div > h4 {
+    color: black !important;
+}
+
+.responses-inner > div > div > h4::before {
+    content: "👉 ";
+}
+
+.responses-inner > div > h4 {
+    color: darkgray !important;
+}
+
+.responses-inner > div > h4::before {
+    content: "ℹ️ ";
+}
+
+
+.response-col_status {
+    font-weight: bold;
+    padding: 15px !important;
+}
+
+.responses-table:not(.live-responses-table) .response-col_status.col_header:before {
+    content: "Possible ";
+}
+
+.response-col_status:not(.col_header) {
+    font-size: 18px;
+}

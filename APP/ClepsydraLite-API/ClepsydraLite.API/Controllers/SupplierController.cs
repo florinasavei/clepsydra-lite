@@ -13,9 +13,9 @@ using Microsoft.Extensions.Logging;
 
 namespace ClepsydraLite.API.Controllers
 {
-    [ApiExplorerSettings(GroupName = "supplier")]
     [ApiController]
     [Route("api/[controller]")]
+    [ApiExplorerSettings(GroupName = "Supplier")]
     public class SupplierController : ControllerBase
     {
         private readonly IShopRepository _shopRepository;

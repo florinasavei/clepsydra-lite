@@ -17,6 +17,7 @@ namespace ClepsydraLite.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [ApiExplorerSettings(GroupName = "Shop")]
     public class ShopController : ControllerBase
     {
         private readonly IShopRepository _shopRepository;
